@@ -1,0 +1,93 @@
+ViewModel:
+  	simple_types *= SimpleType
+    enums *= Enum
+  	modules += Module
+  	entities += Entity
+  	views += View
+;
+
+
+SimpleType:
+    'type' name=ID
+;
+
+Enum:
+    'enum' name=ID '{' values += ID[','] '}'
+;
+
+Module:
+	'module' name=ID '{'
+		'label' kvd label=STRING
+	'}'
+;
+
+Entity:
+  	'entity' name=ID '{'
+  		'module' kvd module=[Module]
+  		'label' kvd label=STRING
+  		'properties' kvd '['
+  	  		properties *= Property[',']
+  	  	']'
+        ('relationships' kvd '['
+  	  		relationships *= Relationship[',']
+  	  	']')?
+  	'}'
+;
+
+Property:
+  	name=ID type=[SimpleType] (unique='unique')? (mandatory='mandatory')? (constraint=Constraint)?
+;
+
+Constraint:
+	'(' 'min' '=' min=INT ',' 'max' '=' max=INT ')'
+;
+
+Relationship:
+    name=ID (list='list')? entity=[Entity] (identifiedBy='identifiedBy')? (subEntity='subEntity')?
+;
+
+View:
+  	'view' name=ID '{'
+	  	'entity' kvd entity=[Entity]
+	  	'label' kvd label=STRING
+	  	'properties' kvd '['
+	     	properties *= ViewProperty[',']
+	    ']'
+	    ( 'repr-property' kvd reprProperty=[Property] )?
+	    'relationships' kvd '['
+	     	relationships *= ViewRelationship[',']
+	    ']'
+  	'}'
+;
+
+ViewProperty:
+  	property=[Property] '{'
+	  	'label' kvd label=STRING
+        'type' kvd type=ViewPropertyType
+	  	'important' kvd important=BOOL
+	  	'editable' kvd editable=BOOL
+	  	'required' kvd required=BOOL
+  	'}'
+;
+
+ViewRelationship:
+	name=ID '{'
+        'label' kvd label=STRING
+		'view' kvd view=[View]
+        'type' kvd type=RelationshipType
+		'editable' kvd editable=BOOL
+        'required' kvd required=BOOL
+	'}'
+;
+
+ViewPropertyType:
+    'text' | 'number' | 'datetime' | 'date' | 'select' | 'image' | 'checkbox'
+;
+
+RelationshipType:
+	( ( 'one' '(' ('choose' | 'select') ')' ) | 'many' ( '(' 'crud' ')' )? )
+;
+
+kvd:
+	':'
+;

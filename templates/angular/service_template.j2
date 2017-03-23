@@ -1,0 +1,6 @@
+'use strict';
+
+angular.module('Doob.{{entity.module.name|lower}}').factory('Service{{entity.name}}', ['restResource', function ($restResource) {
+	var Service{{entity.name}} = $restResource('/{{entity.module.name|lower}}/{{entity.name|lower}}s');
+  	return Service{{entity.name}};
+}]);

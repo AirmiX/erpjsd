@@ -1,0 +1,189 @@
+package com.doobgroup.server.services.{{entity.module.name|lower}};
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.Status;
+
+import org.apache.log4j.Logger;
+
+import com.doobgroup.server.entities.{{entity.module.name|lower}}.{{entity.name}}Bean;
+import com.doobgroup.server.sessionbeans.{{entity.module.name|lower}}.{{entity.name}}BeanDaoLocal;
+
+import com.doobgroup.server.interceptors.AuthenticationInterceptor;
+import com.doobgroup.server.interceptors.JsonizeInterceptor;
+import com.doobgroup.server.util.MessageConstants;
+import com.doobgroup.server.util.ServiceException;
+
+@Stateless
+@Path("/{{entity.module.name|lower}}/{{entity.name|lower}}s")
+public class {{entity.name}}Service {
+
+	private static Logger log = Logger.getLogger({{entity.name}}Service.class);
+
+	@EJB
+	private {{entity.name}}BeanDaoLocal {{entity.name|firstlower}}BeanDao;
+
+	@Context
+	private HttpServletResponse response;
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Interceptors({JsonizeInterceptor.class, AuthenticationInterceptor.class})
+	public List<{{entity.name}}Bean> findAll() {
+		List<{{entity.name}}Bean> retVal = null;
+		try {
+			retVal = {{entity.name|firstlower}}BeanDao.findAll();
+
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ServiceException(MessageConstants.RSP_UNKNOWN_ERROR,
+					Status.INTERNAL_SERVER_ERROR);
+		}
+		return retVal;
+	}
+
+	@GET
+	@Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+	@Interceptors({JsonizeInterceptor.class, AuthenticationInterceptor.class})
+    public {{entity.name}}Bean findById(@PathParam("id") String id) {
+		{{entity.name}}Bean retVal = null;
+		try {
+			retVal = {{entity.name|firstlower}}BeanDao.findById(Long.parseLong(id));
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ServiceException(MessageConstants.RSP_UNKNOWN_ERROR,
+					Status.INTERNAL_SERVER_ERROR);
+		}
+		return retVal;
+    }
+
+     @GET
+	 @Path("{id}/eager")
+	 @Produces(MediaType.APPLICATION_JSON)
+	 @Interceptors({JsonizeInterceptor.class, AuthenticationInterceptor.class})
+	 public {{entity.name}}Bean getEager(@PathParam("id") String id) {
+	 	{{entity.name}}Bean retVal = null;
+	  	try {
+	   		retVal = {{entity.name|firstlower}}BeanDao.findByIdEager(Long.parseLong(id));
+	  	} catch (Exception e) {
+	   		log.error(e.getMessage(), e);
+	   		throw new ServiceException(MessageConstants.RSP_UNKNOWN_ERROR,
+	     		Status.INTERNAL_SERVER_ERROR);
+	  	}
+	  	return retVal;
+    }
+
+    @GET
+	@Path("{id}/connectedEager")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Interceptors({JsonizeInterceptor.class, AuthenticationInterceptor.class})
+	public {{entity.name}}Bean getConnectedEager(@PathParam("id") String id) {
+	 	{{entity.name}}Bean retVal = null;
+	  	try {
+	   		retVal = {{entity.name|firstlower}}BeanDao.findByIdConnectedEager(Long.parseLong(id));
+	  	} catch (Exception e) {
+	   		log.error(e.getMessage(), e);
+	   		throw new ServiceException(MessageConstants.RSP_UNKNOWN_ERROR,
+	     		Status.INTERNAL_SERVER_ERROR);
+	  	}
+	  	return retVal;
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+	@Interceptors({JsonizeInterceptor.class, AuthenticationInterceptor.class})
+    public {{entity.name}}Bean create({{entity.name}}Bean entity) {
+		{{entity.name}}Bean retVal = null;
+		try {
+            {% if not entity is has_items %}
+			retVal = {{entity.name|firstlower}}BeanDao.persist(entity);
+            {% else %}
+			retVal = {{entity.name|firstlower}}BeanDao.crudEager(entity, "I");
+			{{entity.name|firstlower}}BeanDao.flush();
+        	retVal = {{entity.name|firstlower}}BeanDao.findById(entity.getId());
+            {% endif %}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ServiceException(MessageConstants.RSP_UNKNOWN_ERROR,
+					Status.INTERNAL_SERVER_ERROR);
+		}
+		return retVal;
+    }
+
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+	@Interceptors({JsonizeInterceptor.class, AuthenticationInterceptor.class})
+    public {{entity.name}}Bean update({{entity.name}}Bean entity) {
+       {{entity.name}}Bean retVal = null;
+        try {
+            {% if not entity is has_items %}
+        	retVal = {{entity.name|firstlower}}BeanDao.merge(entity);
+            {% else %}
+            retVal = {{entity.name|firstlower}}BeanDao.crudEager(entity, "U");
+        	{{entity.name|firstlower}}BeanDao.flush();
+        	retVal = {{entity.name|firstlower}}BeanDao.findById(entity.getId());
+            {%  endif %}
+        } catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ServiceException(MessageConstants.RSP_UNKNOWN_ERROR,
+					Status.INTERNAL_SERVER_ERROR);
+		}
+		return retVal;
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Produces(MediaType.TEXT_HTML)
+    @Interceptors({AuthenticationInterceptor.class})
+    public String remove(@PathParam("id") Long id) {
+    	try {
+            {% if not entity is has_items %}
+        	{{entity.name|firstlower}}BeanDao.remove(id);
+            {% else %}
+            {{entity.name|firstlower}}BeanDao.crudEager({{entity.name|firstlower}}BeanDao.findById(id), "D");
+            {% endif %}
+        } catch (Exception e) {
+        	log.error(e.getMessage(), e);
+			throw new ServiceException(MessageConstants.RSP_UNKNOWN_ERROR,
+					Status.INTERNAL_SERVER_ERROR);
+        }
+    	return MessageConstants.RSP_OK;
+    }
+
+    @GET
+    @Path("count")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Long> count() {
+    	Map<String, Long> retVal=null;
+    	try {
+    		Long count = {{entity.name|firstlower}}BeanDao.count();
+    		retVal = new HashMap<String, Long>();
+    		retVal.put("count", count);
+        } catch (Exception e) {
+        	log.error(e.getMessage(), e);
+			throw new ServiceException(MessageConstants.RSP_UNKNOWN_ERROR,
+					Status.INTERNAL_SERVER_ERROR);
+        }
+    	return retVal;
+    }
+}

@@ -1,0 +1,162 @@
+<div class="inmodal">
+    <div class="color-line"></div>
+    <div class="modal-header">
+        <h4 class="modal-title">{{localization.getMessage('productiondata.productionProcessSteps.edit')}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSOrdinalNumber')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.PPSOrdinalNumber" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSSuffix')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.PPSSuffix" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSDescription')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.PPSDescription" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSPreparatoryFinishTime')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.PPSPreparatoryFinishTime" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSStepDuration')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.PPSStepDuration" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSPaymentTime')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.PPSPaymentTime" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSAllowedWaste')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.PPSAllowedWaste" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSNormOverthrowAllowed')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.PPSNormOverthrowAllowed" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSControlIndicator')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.PPSControlIndicator" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSValidStartDate')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpPPSValidStartDate">
+                                <span ng-click="open($event, 'openedPPSValidStartDate')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.PPSValidStartDate" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.PPSValidStartDate.dateFormat}}" is-open="openedPPSValidStartDate" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSValidEndDate')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpPPSValidEndDate">
+                                <span ng-click="open($event, 'openedPPSValidEndDate')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.PPSValidEndDate" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.PPSValidEndDate.dateFormat}}" is-open="openedPPSValidEndDate" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSPiecesInStep')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.PPSPiecesInStep" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSEnteredBy')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.PPSEnteredBy" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSEntryDate')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpPPSEntryDate">
+                                <span ng-click="open($event, 'openedPPSEntryDate')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.PPSEntryDate" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.PPSEntryDate.dateFormat}}" is-open="openedPPSEntryDate" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSModifiedBy')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.PPSModifiedBy" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.productionProcessSteps.pPSModificationDate')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpPPSModificationDate">
+                                <span ng-click="open($event, 'openedPPSModificationDate')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.PPSModificationDate" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.PPSModificationDate.dateFormat}}" is-open="openedPPSModificationDate" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <p><span class="required">*</span> {{localization.getMessage('common.requiredField')}}</p>
+            </div>
+        </div>
+        <div class ="row">
+    		<div class="col-lg-12 corps" >
+                <ng-include src ="'productiondata/productionprocesssteps/tmplProductionProcessStepsDetail.tpl.html'">
+                </ng-include>
+            </div>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-doob" ng-click="save()" ng-disabled="!canSave()">{{localization.getMessage('common.save')}}</button>
+        <button class="btn btn-doob" ng-click="revert()" ng-disabled="!canRevert()">{{localization.getMessage('common.clear')}}</button>
+        <button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+    </div>
+</div>

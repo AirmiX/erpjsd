@@ -1,0 +1,101 @@
+<div class="inmodal">
+    <div class="color-line"></div>
+    <div class="modal-header">
+        <h4 class="modal-title">{{localization.getMessage('stockmanagement.revokedProcurementRequest.edit')}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.revokedProcurementRequest.rPRDate')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpRPRDate">
+                                <span ng-click="open($event, 'openedRPRDate')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.RPRDate" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.RPRDate.dateFormat}}" is-open="openedRPRDate" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.revokedProcurementRequest.rPRIdentificationNumber')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.RPRIdentificationNumber" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.revokedProcurementRequest.rPRMeasurementUnit')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.RPRMeasurementUnit" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.revokedProcurementRequest.rPRQuantityRequested')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.RPRQuantityRequested" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.revokedProcurementRequest.rPRQuantityRealized')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.RPRQuantityRealized" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.revokedProcurementRequest.rPRProcurementDeadline')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpRPRProcurementDeadline">
+                                <span ng-click="open($event, 'openedRPRProcurementDeadline')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.RPRProcurementDeadline" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.RPRProcurementDeadline.dateFormat}}" is-open="openedRPRProcurementDeadline" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.revokedProcurementRequest.rPRWorkOrderContractPlace')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.RPRWorkOrderContractPlace" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.revokedProcurementRequest.rPRStatus')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.RPRStatus" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.revokedProcurementRequest.rPRRemark')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.RPRRemark" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                </form>
+                <p><span class="required">*</span> {{localization.getMessage('common.requiredField')}}</p>
+            </div>
+        </div>
+        <div class ="row">
+    		<div class="col-lg-12 corps" >
+                <ng-include src ="'stockmanagement/revokedprocurementrequest/tmplRevokedProcurementRequestDetail.tpl.html'">
+                </ng-include>
+            </div>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-doob" ng-click="save()" ng-disabled="!canSave()">{{localization.getMessage('common.save')}}</button>
+        <button class="btn btn-doob" ng-click="revert()" ng-disabled="!canRevert()">{{localization.getMessage('common.clear')}}</button>
+        <button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+    </div>
+</div>

@@ -1,0 +1,152 @@
+<div class="inmodal">
+    <div class="color-line"></div>
+    <div class="modal-header">
+        <h4 class="modal-title">{{localization.getMessage('stockmanagement.deliveryNoteItem.edit')}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIOrdinalNumber')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIOrdinalNumber" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNILocationAddress')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.DNILocationAddress" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIMeasurementUnit')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.DNIMeasurementUnit" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIQuantityLaunched')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIQuantityLaunched" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIQuantityRejected')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIQuantityRejected" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIQuantityReceived')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIQuantityReceived" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIPlannedPrice')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIPlannedPrice" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIBookValueAmmount')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIBookValueAmmount" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIRealizationAmmount')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIRealizationAmmount" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIPostingPosition')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIPostingPosition" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIAmmountAfterPosting')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIAmmountAfterPosting" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIBatchNumber')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.DNIBatchNumber" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIStorno')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.DNIStorno" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIStepNumber')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIStepNumber" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNISecurityIndicator')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.DNISecurityIndicator" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIPriceDesignation')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIPriceDesignation" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNISellingPrice')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNISellingPrice" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('stockmanagement.deliveryNoteItem.dNIQuantityReserved')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.DNIQuantityReserved" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                </form>
+                <p><span class="required">*</span> {{localization.getMessage('common.requiredField')}}</p>
+            </div>
+        </div>
+        <div class ="row">
+    		<div class="col-lg-12 corps" >
+                <ng-include src ="'stockmanagement/deliverynoteitem/tmplDeliveryNoteItemDetail.tpl.html'">
+                </ng-include>
+            </div>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-doob" ng-click="save()" ng-disabled="!canSave()">{{localization.getMessage('common.save')}}</button>
+        <button class="btn btn-doob" ng-click="revert()" ng-disabled="!canRevert()">{{localization.getMessage('common.clear')}}</button>
+        <button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+    </div>
+</div>

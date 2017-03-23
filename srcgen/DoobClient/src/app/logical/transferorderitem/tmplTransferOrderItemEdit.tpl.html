@@ -1,0 +1,158 @@
+<div class="inmodal">
+    <div class="color-line"></div>
+    <div class="modal-header">
+        <h4 class="modal-title">{{localization.getMessage('logical.transferOrderItem.edit')}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIOrdinalNumber')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.TOIOrdinalNumber" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOILocationAddress')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.TOILocationAddress" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIMeasurementUnit')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.TOIMeasurementUnit" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIQuantityNeeded')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.TOIQuantityNeeded" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIQuantityTransferred')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.TOIQuantityTransferred" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIPriceDesignation')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.TOIPriceDesignation" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIPrice')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.TOIPrice" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIBookValueAmmount')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.TOIBookValueAmmount" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIPostingDate')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpTOIPostingDate">
+                                <span ng-click="open($event, 'openedTOIPostingDate')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.TOIPostingDate" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.TOIPostingDate.dateFormat}}" is-open="openedTOIPostingDate" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIPostingPosition')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.TOIPostingPosition" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIAmmountAfterPosting')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.TOIAmmountAfterPosting" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIBatchNumber')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.TOIBatchNumber" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIStorno')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.TOIStorno" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIFAGroup')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.TOIFAGroup" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIFASubgroup')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.TOIFASubgroup" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIFANomenclature')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.TOIFANomenclature" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIFAAmortizationRate')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.TOIFAAmortizationRate" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('logical.transferOrderItem.tOIFAGroupCode')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.TOIFAGroupCode" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                </form>
+                <p><span class="required">*</span> {{localization.getMessage('common.requiredField')}}</p>
+            </div>
+        </div>
+        <div class ="row">
+    		<div class="col-lg-12 corps" >
+                <ng-include src ="'logical/transferorderitem/tmplTransferOrderItemDetail.tpl.html'">
+                </ng-include>
+            </div>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-doob" ng-click="save()" ng-disabled="!canSave()">{{localization.getMessage('common.save')}}</button>
+        <button class="btn btn-doob" ng-click="revert()" ng-disabled="!canRevert()">{{localization.getMessage('common.clear')}}</button>
+        <button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+    </div>
+</div>

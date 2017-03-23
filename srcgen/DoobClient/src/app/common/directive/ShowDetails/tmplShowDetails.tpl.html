@@ -1,0 +1,78 @@
+<br/>
+<div class="row">
+    <!--div class="col-lg-3 col-lg-offset-1 gauche">
+        <fieldset ng-disabled="true">
+            <table>
+                <tbody ng-repeat="field in model.fields">
+                    <tr><td>{{localization.getMessage(field.label)}}</td></tr>
+                    <tr ng-if="field.type=='text' || field.type=='combobox'"><td><input type="text" ng-model="currentItem[field.name]"></td></tr>
+                    <tr ng-if="field.type=='checkbox'"><td><input type="checkbox" ng-model="currentItem[field.name]"></td></tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div-->
+    <div class="col-lg-4 animated-panel zoomIn">
+                <fieldset ng-disabled="true">
+                    <form method="get" class="form-horizontal col-lg-12" ng-repeat="field in model.fields" ng-disabled="true">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">{{localization.getMessage(field.label)}}</label>
+                            <div ng-if="field.type=='text' || field.type=='combobox'" class="col-sm-7 padding-7">
+                                <input type="text" class="form-control input-xs m-b-xs" ng-model="currentItem[field.name]">
+                            </div>
+                            <div ng-if="field.type=='checkbox'" class="col-sm-7">
+                                <div class="checkbox checkbox-info">
+                                    <input id="checkbox1" type="checkbox" ng-model="currentItem[field.name]">
+                                    <label for="checkbox1"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+
+    <div class="col-lg-8 corps">
+        <tabset>
+            <tab ng-repeat="relationship in model.relationships" heading="{{localization.getMessage(relationship.label)}}">
+                <br/>
+                <div ng-if="currentItem[relationship.name] && currentItem[relationship.name].length!==0">
+                    <table st-table="collectionDisplay"  st-safe-src="currentItem[relationship.name]" class="items fixed-header fixed-header-detail">
+                        <thead>
+                            <tr>
+                                <th ng-repeat="field in relationship.entity.fields" ng-if="field.important"
+                                 lr-drag-src="headers"  lr-drop-target="headers" st-sort="{{field.name}}" st-skip-natural="true">
+                                    {{localization.getMessage(field.label)}}
+                                </th>
+                            </tr>
+                            <!--tr ng-if="currentItem[relationship.name].length>10">
+                                <th colspan="{{calculateSpan(relationship)}}"><input st-search="" class="form-control" placeholder="Search ..." type="text"/></th>
+                            </tr-->
+                            <tr >
+                                <th ng-repeat = "prop in calculateProps(relationship)">
+                                    <input st-search="{{prop}}" class="input-sm form-control" type="search"/>
+                                </th>                                         
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="currentRow in collectionDisplay">
+                                <td ng-repeat="field in relationship.entity.fields" ng-if="field.important">
+                                    <span ng-if="!field.dateFormat">{{currentRow[field.name]}}</span>
+                                    <span ng-if="field.dateFormat">{{currentRow[field.name]|date:field.dateFormat}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!--tfoot ng-if="currentItem[relationship.name].length>10">
+                            <tr>
+                                <td colspan="{{calculateSpan(relationship)}}" class="text-center">
+                                    <div st-pagination="" st-items-by-page="10"></div>
+                                </td>
+                            </tr>
+                        </tfoot-->
+                    </table>
+                </div>
+                <div ng-if="!(currentItem[relationship.name] && currentItem[relationship.name].length!==0)">
+                {{localization.getMessage('common.noEntities')}}
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</div>

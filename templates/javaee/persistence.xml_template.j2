@@ -1,0 +1,27 @@
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+   http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+	<persistence-unit name="doobjsd" transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>doobjsd</jta-data-source>
+		<non-jta-data-source>unmanagedDoobJsd</non-jta-data-source>
+		{% for entity in entities %}
+		<class>com.doobgroup.server.entities.{{entity.module.name|lower}}.{{entity.name}}Bean</class>
+        {% endfor %}
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.transaction.flush_before_completion"
+				value="true" />
+			<property name="hibernate.transaction.auto_close_session"
+				value="true" />
+			<property name="hibernate.transaction.manager_lookup_class"
+				value="org.apache.openejb.hibernate.TransactionManagerLookup" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<!-- Print SQL to stdout. -->
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>

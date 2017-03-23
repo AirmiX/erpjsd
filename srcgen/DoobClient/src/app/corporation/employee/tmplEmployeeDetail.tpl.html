@@ -1,0 +1,858 @@
+<div class="col-lg-4 animated-panel zoomIn" ng-if="mode != 'edit'">
+    <form class="form-horizontal">
+        <fieldset ng-disabled="true">
+            <div class="col-lg-12" ng-disabled="true">
+                <div ng-repeat="property in itemDefinition.properties" class="form-group">
+                    <label class="col-sm-5 control-label">{{localization.getMessage(itemDefinition.label + '.' + property.label)}}</label>
+                    <div class="col-sm-7 padding-7">
+                        <input type="text" class="form-control input-xs m-b-xs" value="{{itemEdit[property.name]}}" />
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="corps animated-panel zoomIn" ng-class="{'col-lg-8':(mode != 'edit')}">
+    <tabset>
+        <tab heading="{{localization.getMessage('corporation.employee.organizationUnits')}}">
+            <div class="modal-body" ng-if="!(itemEdit['organizationUnits'])">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" ng-if="itemEdit['organizationUnits']">
+                <table st-table="organizationUnitsCollection" st-safe-src="itemEdit['organizationUnits']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="property in organizationUnitsDefinition.properties"
+                             lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                                {{localization.getMessage(organizationUnitsDefinition.label + '.' + property.label)}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="property in organizationUnitsDefinition.properties">
+                                <span ng-if="!property.dateFormat">{{itemEdit['organizationUnits'][property.name]}}</span>
+                                <span ng-if="property.dateFormat">{{itemEdit['organizationUnits'][property.name] | date:property.dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body" ng-if="mode == 'edit'">
+                <button type="button" ng-click="openChooseOrganizationUnitsDialog()" class="btn btn-sm btn-doob">
+                    <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                </button>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.schoolDegree')}}">
+            <div class="modal-body" ng-if="!(itemEdit['schoolDegree'])">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" ng-if="itemEdit['schoolDegree']">
+                <table st-table="schoolDegreeCollection" st-safe-src="itemEdit['schoolDegree']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="property in schoolDegreeDefinition.properties"
+                             lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                                {{localization.getMessage(schoolDegreeDefinition.label + '.' + property.label)}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="property in schoolDegreeDefinition.properties">
+                                <span ng-if="!property.dateFormat">{{itemEdit['schoolDegree'][property.name]}}</span>
+                                <span ng-if="property.dateFormat">{{itemEdit['schoolDegree'][property.name] | date:property.dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body" ng-if="mode == 'edit'">
+                <button type="button" ng-click="openChooseSchoolDegreeDialog()" class="btn btn-sm btn-doob">
+                    <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                </button>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.countryOfBirth')}}">
+            <div class="modal-body" ng-if="!(itemEdit['countryOfBirth'])">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" ng-if="itemEdit['countryOfBirth']">
+                <table st-table="countryOfBirthCollection" st-safe-src="itemEdit['countryOfBirth']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="property in countryOfBirthDefinition.properties"
+                             lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                                {{localization.getMessage(countryOfBirthDefinition.label + '.' + property.label)}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="property in countryOfBirthDefinition.properties">
+                                <span ng-if="!property.dateFormat">{{itemEdit['countryOfBirth'][property.name]}}</span>
+                                <span ng-if="property.dateFormat">{{itemEdit['countryOfBirth'][property.name] | date:property.dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body" ng-if="mode == 'edit'">
+                <button type="button" ng-click="openChooseCountryOfBirthDialog()" class="btn btn-sm btn-doob">
+                    <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                </button>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.nationality')}}">
+            <div class="modal-body" ng-if="!(itemEdit['nationality'])">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" ng-if="itemEdit['nationality']">
+                <table st-table="nationalityCollection" st-safe-src="itemEdit['nationality']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="property in nationalityDefinition.properties"
+                             lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                                {{localization.getMessage(nationalityDefinition.label + '.' + property.label)}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="property in nationalityDefinition.properties">
+                                <span ng-if="!property.dateFormat">{{itemEdit['nationality'][property.name]}}</span>
+                                <span ng-if="property.dateFormat">{{itemEdit['nationality'][property.name] | date:property.dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body" ng-if="mode == 'edit'">
+                <button type="button" ng-click="openChooseNationalityDialog()" class="btn btn-sm btn-doob">
+                    <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                </button>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.gender')}}">
+            <div class="modal-body" ng-if="!(itemEdit['gender'])">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" ng-if="itemEdit['gender']">
+                <table st-table="genderCollection" st-safe-src="itemEdit['gender']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="property in genderDefinition.properties"
+                             lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                                {{localization.getMessage(genderDefinition.label + '.' + property.label)}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="property in genderDefinition.properties">
+                                <span ng-if="!property.dateFormat">{{itemEdit['gender'][property.name]}}</span>
+                                <span ng-if="property.dateFormat">{{itemEdit['gender'][property.name] | date:property.dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body" ng-if="mode == 'edit'">
+                <button type="button" ng-click="openChooseGenderDialog()" class="btn btn-sm btn-doob">
+                    <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                </button>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.address')}}">
+            <div class="modal-body" ng-if="!(itemEdit['address'])">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" ng-if="itemEdit['address']">
+                <table st-table="addressCollection" st-safe-src="itemEdit['address']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="property in addressDefinition.properties"
+                             lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                                {{localization.getMessage(addressDefinition.label + '.' + property.label)}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="property in addressDefinition.properties">
+                                <span ng-if="!property.dateFormat">{{itemEdit['address'][property.name]}}</span>
+                                <span ng-if="property.dateFormat">{{itemEdit['address'][property.name] | date:property.dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body" ng-if="mode == 'edit'">
+                <button type="button" ng-click="openChooseAddressDialog()" class="btn btn-sm btn-doob">
+                    <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                </button>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.workstation')}}">
+            <div class="modal-body" ng-if="!(itemEdit['workstation'])">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" ng-if="itemEdit['workstation']">
+                <table st-table="workstationCollection" st-safe-src="itemEdit['workstation']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="property in workstationDefinition.properties"
+                             lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                                {{localization.getMessage(workstationDefinition.label + '.' + property.label)}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="property in workstationDefinition.properties">
+                                <span ng-if="!property.dateFormat">{{itemEdit['workstation'][property.name]}}</span>
+                                <span ng-if="property.dateFormat">{{itemEdit['workstation'][property.name] | date:property.dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body" ng-if="mode == 'edit'">
+                <button type="button" ng-click="openChooseWorkstationDialog()" class="btn btn-sm btn-doob">
+                    <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                </button>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.authority')}}">
+            <div class="modal-body" ng-if="!(itemEdit['authority'])">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" ng-if="itemEdit['authority']">
+                <table st-table="authorityCollection" st-safe-src="itemEdit['authority']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="property in authorityDefinition.properties"
+                             lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                                {{localization.getMessage(authorityDefinition.label + '.' + property.label)}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="property in authorityDefinition.properties">
+                                <span ng-if="!property.dateFormat">{{itemEdit['authority'][property.name]}}</span>
+                                <span ng-if="property.dateFormat">{{itemEdit['authority'][property.name] | date:property.dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body" ng-if="mode == 'edit'">
+                <button type="button" ng-click="openChooseAuthorityDialog()" class="btn btn-sm btn-doob">
+                    <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                </button>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.finalDegree')}}">
+            <div class="modal-body" ng-if="!(itemEdit['finalDegree'])">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" ng-if="itemEdit['finalDegree']">
+                <table st-table="finalDegreeCollection" st-safe-src="itemEdit['finalDegree']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="property in finalDegreeDefinition.properties"
+                             lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                                {{localization.getMessage(finalDegreeDefinition.label + '.' + property.label)}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="property in finalDegreeDefinition.properties">
+                                <span ng-if="!property.dateFormat">{{itemEdit['finalDegree'][property.name]}}</span>
+                                <span ng-if="property.dateFormat">{{itemEdit['finalDegree'][property.name] | date:property.dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body" ng-if="mode == 'edit'">
+                <button type="button" ng-click="openChooseFinalDegreeDialog()" class="btn btn-sm btn-doob">
+                    <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                </button>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.academicTitle')}}">
+            <div class="modal-body" ng-if="!(itemEdit['academicTitle'])">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" ng-if="itemEdit['academicTitle']">
+                <table st-table="academicTitleCollection" st-safe-src="itemEdit['academicTitle']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="property in academicTitleDefinition.properties"
+                             lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                                {{localization.getMessage(academicTitleDefinition.label + '.' + property.label)}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="property in academicTitleDefinition.properties">
+                                <span ng-if="!property.dateFormat">{{itemEdit['academicTitle'][property.name]}}</span>
+                                <span ng-if="property.dateFormat">{{itemEdit['academicTitle'][property.name] | date:property.dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body" ng-if="mode == 'edit'">
+                <button type="button" ng-click="openChooseAcademicTitleDialog()" class="btn btn-sm btn-doob">
+                    <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                </button>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.orderHeadings')}}">
+            <div class="row" ng-if="itemEdit['orderHeadings'] && itemEdit['orderHeadings'].length > 0">
+                <table st-table="orderHeadingsCollection" st-safe-src="itemEdit['orderHeadings']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="property in orderHeadingsDefinition.properties"
+                            lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                            {{localization.getMessage(orderHeadingsDefinition.label + '.' + property.label)}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th ng-repeat="property in orderHeadingsDefinition.properties">
+                            <input st-search="{{property.name}}" class="input-sm form-control" type="search"/>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="mode != 'edit'">
+                    <tr ng-repeat="currentRow in orderHeadingsCollection">
+                        <td ng-repeat="property in orderHeadingsDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody ng-if="mode == 'edit'">
+                    <tr ng-repeat="currentRow in orderHeadingsCollection" st-select-row="currentRow" ng-click="orderHeadingSelection(currentRow, $index)"
+                        ng-if="currentRow.deleted != true">
+                        <td ng-repeat="property in orderHeadingsDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" ng-if="!(itemEdit['orderHeadings'] && itemEdit['orderHeadings'].length > 0)">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" >
+                <div class="row" ng-if="mode == 'edit'">
+                    <div class="btn-toolbar animated-panel zoomIn">
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-click="openOrderHeadingEditDialog(true)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.new')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="orderHeadingEdit == null" ng-click="removeOrderHeading(orderHeadingEdit)" class="btn btn-sm btn-doob btn-group">
+                                <i class="glyphicon glyphicon-remove-circle"></i> {{localization.getMessage('button.remove')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="orderHeadingEdit == null" ng-click="openOrderHeadingEditDialog(false)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.update')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.bankAccounts')}}">
+            <div class="row" ng-if="itemEdit['bankAccounts'] && itemEdit['bankAccounts'].length > 0">
+                <table st-table="bankAccountsCollection" st-safe-src="itemEdit['bankAccounts']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="property in bankAccountsDefinition.properties"
+                            lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                            {{localization.getMessage(bankAccountsDefinition.label + '.' + property.label)}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th ng-repeat="property in bankAccountsDefinition.properties">
+                            <input st-search="{{property.name}}" class="input-sm form-control" type="search"/>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="mode != 'edit'">
+                    <tr ng-repeat="currentRow in bankAccountsCollection">
+                        <td ng-repeat="property in bankAccountsDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody ng-if="mode == 'edit'">
+                    <tr ng-repeat="currentRow in bankAccountsCollection" st-select-row="currentRow" ng-click="bankAccountSelection(currentRow, $index)"
+                        ng-if="currentRow.deleted != true">
+                        <td ng-repeat="property in bankAccountsDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" ng-if="!(itemEdit['bankAccounts'] && itemEdit['bankAccounts'].length > 0)">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" >
+                <div class="row" ng-if="mode == 'edit'">
+                    <div class="btn-toolbar animated-panel zoomIn">
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-click="openBankAccountEditDialog(true)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.new')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="bankAccountEdit == null" ng-click="removeBankAccount(bankAccountEdit)" class="btn btn-sm btn-doob btn-group">
+                                <i class="glyphicon glyphicon-remove-circle"></i> {{localization.getMessage('button.remove')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="bankAccountEdit == null" ng-click="openBankAccountEditDialog(false)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.update')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.technologicalUnits')}}">
+            <div class="row" ng-if="itemEdit['technologicalUnits'] && itemEdit['technologicalUnits'].length > 0">
+                <table st-table="technologicalUnitsCollection" st-safe-src="itemEdit['technologicalUnits']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="property in technologicalUnitsDefinition.properties"
+                            lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                            {{localization.getMessage(technologicalUnitsDefinition.label + '.' + property.label)}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th ng-repeat="property in technologicalUnitsDefinition.properties">
+                            <input st-search="{{property.name}}" class="input-sm form-control" type="search"/>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="mode != 'edit'">
+                    <tr ng-repeat="currentRow in technologicalUnitsCollection">
+                        <td ng-repeat="property in technologicalUnitsDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody ng-if="mode == 'edit'">
+                    <tr ng-repeat="currentRow in technologicalUnitsCollection" st-select-row="currentRow" ng-click="availabilityTechnologicalUnitsSelection(currentRow, $index)"
+                        ng-if="currentRow.deleted != true">
+                        <td ng-repeat="property in technologicalUnitsDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" ng-if="!(itemEdit['technologicalUnits'] && itemEdit['technologicalUnits'].length > 0)">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" >
+                <div class="row" ng-if="mode == 'edit'">
+                    <div class="btn-toolbar animated-panel zoomIn">
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-click="openAvailabilityTechnologicalUnitsEditDialog(true)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.new')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="availabilityTechnologicalUnitsEdit == null" ng-click="removeAvailabilityTechnologicalUnits(availabilityTechnologicalUnitsEdit)" class="btn btn-sm btn-doob btn-group">
+                                <i class="glyphicon glyphicon-remove-circle"></i> {{localization.getMessage('button.remove')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="availabilityTechnologicalUnitsEdit == null" ng-click="openAvailabilityTechnologicalUnitsEditDialog(false)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.update')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.specializations')}}">
+            <div class="row" ng-if="itemEdit['specializations'] && itemEdit['specializations'].length > 0">
+                <table st-table="specializationsCollection" st-safe-src="itemEdit['specializations']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="property in specializationsDefinition.properties"
+                            lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                            {{localization.getMessage(specializationsDefinition.label + '.' + property.label)}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th ng-repeat="property in specializationsDefinition.properties">
+                            <input st-search="{{property.name}}" class="input-sm form-control" type="search"/>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="mode != 'edit'">
+                    <tr ng-repeat="currentRow in specializationsCollection">
+                        <td ng-repeat="property in specializationsDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody ng-if="mode == 'edit'">
+                    <tr ng-repeat="currentRow in specializationsCollection" st-select-row="currentRow" ng-click="specializationSelection(currentRow, $index)"
+                        ng-if="currentRow.deleted != true">
+                        <td ng-repeat="property in specializationsDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" ng-if="!(itemEdit['specializations'] && itemEdit['specializations'].length > 0)">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" >
+                <div class="row" ng-if="mode == 'edit'">
+                    <div class="btn-toolbar animated-panel zoomIn">
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-click="openSpecializationEditDialog(true)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.new')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="specializationEdit == null" ng-click="removeSpecialization(specializationEdit)" class="btn btn-sm btn-doob btn-group">
+                                <i class="glyphicon glyphicon-remove-circle"></i> {{localization.getMessage('button.remove')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="specializationEdit == null" ng-click="openSpecializationEditDialog(false)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.update')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.assitantOfAccountables')}}">
+            <div class="row" ng-if="itemEdit['assitantOfAccountables'] && itemEdit['assitantOfAccountables'].length > 0">
+                <table st-table="assitantOfAccountablesCollection" st-safe-src="itemEdit['assitantOfAccountables']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="property in assitantOfAccountablesDefinition.properties"
+                            lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                            {{localization.getMessage(assitantOfAccountablesDefinition.label + '.' + property.label)}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th ng-repeat="property in assitantOfAccountablesDefinition.properties">
+                            <input st-search="{{property.name}}" class="input-sm form-control" type="search"/>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="mode != 'edit'">
+                    <tr ng-repeat="currentRow in assitantOfAccountablesCollection">
+                        <td ng-repeat="property in assitantOfAccountablesDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody ng-if="mode == 'edit'">
+                    <tr ng-repeat="currentRow in assitantOfAccountablesCollection" st-select-row="currentRow" ng-click="stockroomSelection(currentRow, $index)"
+                        ng-if="currentRow.deleted != true">
+                        <td ng-repeat="property in assitantOfAccountablesDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" ng-if="!(itemEdit['assitantOfAccountables'] && itemEdit['assitantOfAccountables'].length > 0)">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" >
+                <div class="row" ng-if="mode == 'edit'">
+                    <div class="btn-toolbar animated-panel zoomIn">
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-click="openStockroomEditDialog(true)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.new')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="stockroomEdit == null" ng-click="removeStockroom(stockroomEdit)" class="btn btn-sm btn-doob btn-group">
+                                <i class="glyphicon glyphicon-remove-circle"></i> {{localization.getMessage('button.remove')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="stockroomEdit == null" ng-click="openStockroomEditDialog(false)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.update')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.users')}}">
+            <div class="row" ng-if="itemEdit['users'] && itemEdit['users'].length > 0">
+                <table st-table="usersCollection" st-safe-src="itemEdit['users']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="property in usersDefinition.properties"
+                            lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                            {{localization.getMessage(usersDefinition.label + '.' + property.label)}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th ng-repeat="property in usersDefinition.properties">
+                            <input st-search="{{property.name}}" class="input-sm form-control" type="search"/>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="mode != 'edit'">
+                    <tr ng-repeat="currentRow in usersCollection">
+                        <td ng-repeat="property in usersDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody ng-if="mode == 'edit'">
+                    <tr ng-repeat="currentRow in usersCollection" st-select-row="currentRow" ng-click="appUserSelection(currentRow, $index)"
+                        ng-if="currentRow.deleted != true">
+                        <td ng-repeat="property in usersDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" ng-if="!(itemEdit['users'] && itemEdit['users'].length > 0)">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" >
+                <div class="row" ng-if="mode == 'edit'">
+                    <div class="btn-toolbar animated-panel zoomIn">
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-click="openAppUserEditDialog(true)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.new')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="appUserEdit == null" ng-click="removeAppUser(appUserEdit)" class="btn btn-sm btn-doob btn-group">
+                                <i class="glyphicon glyphicon-remove-circle"></i> {{localization.getMessage('button.remove')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="appUserEdit == null" ng-click="openAppUserEditDialog(false)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.update')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.accountables')}}">
+            <div class="row" ng-if="itemEdit['accountables'] && itemEdit['accountables'].length > 0">
+                <table st-table="accountablesCollection" st-safe-src="itemEdit['accountables']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="property in accountablesDefinition.properties"
+                            lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                            {{localization.getMessage(accountablesDefinition.label + '.' + property.label)}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th ng-repeat="property in accountablesDefinition.properties">
+                            <input st-search="{{property.name}}" class="input-sm form-control" type="search"/>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="mode != 'edit'">
+                    <tr ng-repeat="currentRow in accountablesCollection">
+                        <td ng-repeat="property in accountablesDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody ng-if="mode == 'edit'">
+                    <tr ng-repeat="currentRow in accountablesCollection" st-select-row="currentRow" ng-click="stockroomSelection(currentRow, $index)"
+                        ng-if="currentRow.deleted != true">
+                        <td ng-repeat="property in accountablesDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" ng-if="!(itemEdit['accountables'] && itemEdit['accountables'].length > 0)">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" >
+                <div class="row" ng-if="mode == 'edit'">
+                    <div class="btn-toolbar animated-panel zoomIn">
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-click="openStockroomEditDialog(true)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.new')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="stockroomEdit == null" ng-click="removeStockroom(stockroomEdit)" class="btn btn-sm btn-doob btn-group">
+                                <i class="glyphicon glyphicon-remove-circle"></i> {{localization.getMessage('button.remove')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="stockroomEdit == null" ng-click="openStockroomEditDialog(false)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.update')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.familyMembers')}}">
+            <div class="row" ng-if="itemEdit['familyMembers'] && itemEdit['familyMembers'].length > 0">
+                <table st-table="familyMembersCollection" st-safe-src="itemEdit['familyMembers']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="property in familyMembersDefinition.properties"
+                            lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                            {{localization.getMessage(familyMembersDefinition.label + '.' + property.label)}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th ng-repeat="property in familyMembersDefinition.properties">
+                            <input st-search="{{property.name}}" class="input-sm form-control" type="search"/>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="mode != 'edit'">
+                    <tr ng-repeat="currentRow in familyMembersCollection">
+                        <td ng-repeat="property in familyMembersDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody ng-if="mode == 'edit'">
+                    <tr ng-repeat="currentRow in familyMembersCollection" st-select-row="currentRow" ng-click="familyMemberSelection(currentRow, $index)"
+                        ng-if="currentRow.deleted != true">
+                        <td ng-repeat="property in familyMembersDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" ng-if="!(itemEdit['familyMembers'] && itemEdit['familyMembers'].length > 0)">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" >
+                <div class="row" ng-if="mode == 'edit'">
+                    <div class="btn-toolbar animated-panel zoomIn">
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-click="openFamilyMemberEditDialog(true)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.new')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="familyMemberEdit == null" ng-click="removeFamilyMember(familyMemberEdit)" class="btn btn-sm btn-doob btn-group">
+                                <i class="glyphicon glyphicon-remove-circle"></i> {{localization.getMessage('button.remove')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="familyMemberEdit == null" ng-click="openFamilyMemberEditDialog(false)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.update')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{localization.getMessage('corporation.employee.works')}}">
+            <div class="row" ng-if="itemEdit['works'] && itemEdit['works'].length > 0">
+                <table st-table="worksCollection" st-safe-src="itemEdit['works']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="property in worksDefinition.properties"
+                            lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                            {{localization.getMessage(worksDefinition.label + '.' + property.label)}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th ng-repeat="property in worksDefinition.properties">
+                            <input st-search="{{property.name}}" class="input-sm form-control" type="search"/>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="mode != 'edit'">
+                    <tr ng-repeat="currentRow in worksCollection">
+                        <td ng-repeat="property in worksDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody ng-if="mode == 'edit'">
+                    <tr ng-repeat="currentRow in worksCollection" st-select-row="currentRow" ng-click="workOnSelection(currentRow, $index)"
+                        ng-if="currentRow.deleted != true">
+                        <td ng-repeat="property in worksDefinition.properties">
+                            <span ng-if="!property.dateFormat">{{currentRow[property.name]}}</span>
+                            <span ng-if="property.dateFormat">{{currentRow[property.name]|date:property.dateFormat}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" ng-if="!(itemEdit['works'] && itemEdit['works'].length > 0)">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" >
+                <div class="row" ng-if="mode == 'edit'">
+                    <div class="btn-toolbar animated-panel zoomIn">
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-click="openWorkOnEditDialog(true)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.new')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="workOnEdit == null" ng-click="removeWorkOn(workOnEdit)" class="btn btn-sm btn-doob btn-group">
+                                <i class="glyphicon glyphicon-remove-circle"></i> {{localization.getMessage('button.remove')}}
+                            </button>
+                        </div>
+                        <div class="btn-group clearfix">
+                            <button type="button" ng-disabled="workOnEdit == null" ng-click="openWorkOnEditDialog(false)" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.update')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+</div>

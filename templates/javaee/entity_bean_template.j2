@@ -1,0 +1,204 @@
+package com.doobgroup.server.entities.{{entity.module.name|lower}};
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Date;
+import java.awt.Image;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.Version;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLDelete;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import com.doobgroup.server.util.JsonDateDeserializer;
+import com.doobgroup.server.util.JsonDateSerializer;
+
+{% for ent in get_distinct_relationship_entities_2(entity) %}
+import com.doobgroup.server.entities.{{ent.module.name|lower}}.{{ent.name}}Bean;
+{% endfor %}
+
+@Entity
+@Table(name = "{{entity.name|upper}}"
+    {% if entity.properties|selectattr("unique", "equalto", "unique")|list|length > 0 or entity.relationships|selectattr("identifiedBy", "equalto", "identifiedBy")|list|length > 0 %}
+    , uniqueConstraints = @UniqueConstraint(columnNames = {
+		{% for property in entity.properties|selectattr("unique", "equalto", "unique") %} "{{ property.name }}" {% if not loop.last %}, {% endif %} {% endfor %}
+        {% if entity.properties|selectattr("unique", "equalto", "unique")|list|length > 0 and
+            entity.relationships|selectattr("identifiedBy", "equalto", "identifiedBy")|list|length > 0 %}, {% endif %}
+        {% for relationship in entity.relationships|selectattr("identifiedBy", "equalto", "identifiedBy") %} "{{ relationship.name }}" {% if not loop.last %}, {% endif %} {% endfor %}
+	}){% endif %})
+@SQLDelete(sql="UPDATE {{entity.name|upper}} SET deleted = 1 WHERE {{entity.name}}_id = ? AND version=?")
+@Where(clause = "deleted = 0")
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
+@JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "$resolved", "$promise" {% if not entity is is_item and not entity is has_items %} ,"deleted" {% endif %}})
+public class {{entity.name}}Bean implements Serializable {
+
+	private static final long serialVersionUID = 3167766219958010418L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "{{entity.name}}_id")
+	protected Long id;
+	@Version
+	protected int version;
+	protected boolean deleted;
+
+    {% for property in entity.properties %}
+        {% if property.type == 'date' %}
+    @Temporal(TemporalType.DATE)
+        {% endif %}
+	@Column(name = "{{property.name}}"{% if property.mandatory %}, nullable = false{% endif %})
+	protected {{property.type|javatype}} {{property.name}};
+    {% endfor %}
+
+    {% for relationship in entity.relationships %}
+        {% if relationship.list %}
+    @OneToMany(mappedBy = "{{get_relationship_by_entity(relationship.entity, entity).name|firstlower}}", fetch = FetchType.LAZY, cascade = { CascadeType.REFRESH })
+    @Where(clause = "deleted = 0")
+    protected Set<{{relationship.entity.name}}Bean> {{relationship.name}} = new HashSet<{{relationship.entity.name}}Bean>();
+        {% else %}
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name="{{relationship.name}}")
+    protected {{relationship.entity.name}}Bean {{relationship.name}};
+        {% endif %}
+    {% endfor %}
+
+	@JsonProperty("id")
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@JsonProperty("deleted")
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	@JsonProperty("version")
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		version = this.version;
+	}
+
+    {% for property in entity.properties %}
+        {% if property.type == 'date' %}
+    @JsonSerialize(using = JsonDateSerializer.class)
+	@JsonProperty("{{property.name}}")
+	public Date get{{property.name|firstupper}}() {
+		return {{property.name}};
+	}
+
+	@JsonDeserialize(using = JsonDateDeserializer.class)
+	@JsonProperty("{{property.name}}")
+	public void set{{property.name|firstupper}}(Date {{property.name}}) {
+		this.{{property.name}} = {{property.name}};
+	}
+        {% else %}
+    @JsonProperty("{{property.name}}")
+	public {{property.type|javatype}} get{{property.name|firstupper}}() {
+		return {{property.name}};
+	}
+
+	public void set{{property.name|firstupper}}({{property.type|javatype}} {{property.name}}) {
+		this.{{property.name}} = {{property.name}};
+	}
+        {% endif %}
+
+    {% endfor %}
+
+    {% for relationship in entity.relationships %}
+        {% if relationship.list %}
+    @JsonProperty("{{relationship.name}}")
+	public Set<{{relationship.entity.name}}Bean> get{{relationship.name|firstupper}}() {
+		return {{relationship.name}};
+	}
+
+	public void set{{relationship.name|firstupper}}(Set<{{relationship.entity.name}}Bean> {{relationship.name}}) {
+		this.{{relationship.name}} = {{relationship.name}};
+	}
+        {% else %}
+    @JsonProperty("{{relationship.name}}")
+	public {{relationship.entity.name}}Bean get{{relationship.name|firstupper}}() {
+		return {{relationship.name}};
+	}
+
+    public void set{{relationship.name|firstupper}}({{relationship.entity.name}}Bean {{relationship.name}}) {
+		this.{{relationship.name}} = {{relationship.name}};
+	}
+        {% endif %}
+
+    {% endfor %}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || !(o instanceof {{entity.name}}Bean)) {
+			return false;
+		}
+		if (id == null) return false;
+		return id.equals(((({{entity.name}}Bean) o).getId()));
+	}
+
+	@Override
+	public int hashCode() {
+		if (id != null) {
+			return id.hashCode();
+		} else {
+			return super.hashCode();
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "{{entity.name}}Bean [id=" + id + ", deleted=" + deleted + ", version=" + version
+        {% for property in entity.properties %}
+			+ ", {{property.name}}=" + {{property.name}}
+        {% endfor %}
+        {% for relationship in entity.relationships %}
+			// + ", {{relationship.name}}=" + {{relationship.name}}
+        {% endfor %}
+			+ "]";
+	}
+}

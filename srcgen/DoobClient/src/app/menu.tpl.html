@@ -1,0 +1,90 @@
+<nav class="navbar" >
+	<div class="container col-md-10" >
+		<div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#/">Doob3D ERP</a></li>
+                <!--li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Environment <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#/environment/post">Post</a></li>
+                        <li><a href="#/environment/territorial_unit">Territorial unit</a></li>                        
+                        <li><a href="#/environment/territorial_unit_type">Territorial unit type</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Corporation<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+						<li><a href="#/corporation/account">Account</a></li>
+						<li><a href="#/corporation/location_type">Location type</a></li>
+						<li><a href="#/corporation/location">Location</a></li>                        
+						<li><a href="#/corporation/organization_unit_type">Organization unit type</a></li>
+						<li><a href="#/corporation/organization_unit">Organization unit</a></li>
+						<li><a href="#/corporation/work_calendar">Work calendar</a></li>
+						<li><a href="#/corporation/employee">Employee</a></li>
+						<li><a href="#/corporation/signatory">Signatory</a></li>
+						<li><a href="#/corporation/document_type">Document type</a></li>
+						<li><a href="#/corporation/document">Document</a></li>						
+						<li><a href="#/corporation/business_entity">Business entity</a></li>
+						<li><a href="#/corporation/activity_type">Activity type</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Common Business Entities <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+						<li><a href="#/commonbusinessentities/classifications">Classification</a></li-->
+						<!--li><a href="#/commonbusinessentities">Classification archive</a></li-->
+						<!--li><a href="#/commonbusinessentities/characteristicsRegistrys">Characteristics registry</a></li-->
+						<!--li><a href="#/commonbusinessentities/characteristicTypes">Characteristic type</a></li>
+						<li><a href="#/commonbusinessentities/measurementUnits">Measurement unit</a></li>
+						<li><a href="#/commonbusinessentities/regulatives">Regulative</a></li>
+						<li><a href="#/commonbusinessentities/identifications">Identification</a></li-->
+						<!--li><a href="#/commonbusinessentities">Identification archive</a></li-->
+						<!--li><a href="#/commonbusinessentities/characteristics">Characteristic</a></li-->
+                    <!--/ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Username <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a>Proflie</a></li>
+                        <li><a >Logout</a></li>
+                    </ul>
+                </li-->
+            </ul>
+        </div>
+    </div>
+    
+    <div class="container col-md-1">
+		<div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Language <span class="caret"></span></a>
+                                        
+                    <ul class="dropdown-menu" role="menu">
+                      <li ng-repeat="lang in languages" ng-click="setSelected(lang)" ng-class="{selected: lang == langSelected}">{{lang.name}}  </li>
+                  </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+	<div class="container col-md-1">
+<!-- <div class="sidebar-nav">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-collapse collapse sidebar-navbar-collapse"> -->
+		<div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{currentUser.UUsername}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-click="logout()"><a>Logout</a></li>
+                        <li><a href="#/changepassword">{{localization.getMessage('administration.users.changePassword')}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+	</div>
+    
+</nav>
+<!--hr>
+</hr-->

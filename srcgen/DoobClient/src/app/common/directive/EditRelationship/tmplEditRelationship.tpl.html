@@ -1,0 +1,84 @@
+<div ng-controller="ctrlEditRelationship">
+	<div class="modal-header">
+		<h3 class="modal-title">{{localization.getMessage(relationshipModel.label)}}</h3>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="table-container">
+					<table st-table="items"  st-safe-src="items" st-pagination-scroll  st-pipe="callServer" class="items fixed-header">
+						<thead>
+							<tr>
+								<th></th>
+								<th ng-repeat="field in relationshipModel.entity.fields" class="table-column-header" ng-if="field.important"
+								 lr-drag-src="headers"  lr-drop-target="headers" st-sort="{{field.name}}" st-skip-natural="true">
+									{{localization.getMessage(field.label)}}
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th ng-repeat="field in relationshipModel.entity.fields" ng-if="field.important">
+									<input st-search="field.name" class="input-sm form-control" type="search"/>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="currentRow in items">
+								<td ng-show='flagSingle'><input type="radio" name="itemChoose" ng-model="$parent.selectedItem" ng-value="currentRow" ng-click="radioClick(currentRow)"></td>
+								<td ng-show='flagMultiple'>
+									<input type="checkbox" checklist-model="selectedItems" checklist-value="currentRow" ng-click="checkboxClick(currentRow)">
+								</td>
+								<td ng-repeat="field in relationshipModel.entity.fields" ng-if="field.important">
+									{{currentRow[field.name]}}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div ng-show="isLoading" class="loading-indicator"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div ng-if='flagSingle'>
+					<div ng-repeat="field in relationshipModel.entity.fields" ng-if="field.important">
+						{{localization.getMessage(field.label)}}: {{choosen[field.name]}}
+					</div>
+				</div>
+				<div ng-if='flagMultiple'>
+					<table st-table="choosensShow"  st-safe-src="choosens" class="items fixed-header">
+						<thead>
+							<tr>
+								<th ng-repeat="field in relationshipModel.entity.fields" class="table-column-header" ng-if="field.important"
+								 lr-drag-src="headers"  lr-drop-target="headers" st-sort="{{field.name}}" st-skip-natural="true">
+									{{localization.getMessage(field.label)}}
+								</th>
+							</tr>
+							<tr>
+								<th ng-repeat="field in relationshipModel.entity.fields" ng-if="field.important">
+									<input st-search="field.name" class="input-sm form-control" type="search"/>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="currentRow in choosensShow">
+								<td ng-repeat="field in relationshipModel.entity.fields" ng-if="field.important">
+									{{currentRow[field.name]}}
+								</td>
+							</tr>
+						</tbody>
+						<tfoot ng-if="choosens.length>10">
+                            <tr>
+                                <td colspan="{{spanSize}}" class="text-center">
+                                    <div st-pagination="" st-items-by-page="10"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-doob" ng-click="choose()">{{localization.getMessage('common.choose')}}</button>
+		<button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+	</div>
+</div>

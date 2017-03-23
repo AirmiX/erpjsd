@@ -1,0 +1,74 @@
+<div class="inmodal">
+    <div class="color-line"></div>
+    <div class="modal-header">
+        <h4 class="modal-title">{{localization.getMessage('commonbusinessentities.classificationArchive.edit')}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('commonbusinessentities.classificationArchive.cATime')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpCATime">
+                                <span ng-click="open($event, 'openedCATime')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.CATime" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.CATime.dateFormat}}" is-open="openedCATime" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('commonbusinessentities.classificationArchive.cAName')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.CAName" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('commonbusinessentities.classificationArchive.cAShortName')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.CAShortName" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('commonbusinessentities.classificationArchive.cANameFormat')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.CANameFormat" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('commonbusinessentities.classificationArchive.cAOperation')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.CAOperation" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('commonbusinessentities.classificationArchive.cAIdentificationCodeArchive')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.CAIdentificationCodeArchive" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                </form>
+                <p><span class="required">*</span> {{localization.getMessage('common.requiredField')}}</p>
+            </div>
+        </div>
+        <div class ="row">
+    		<div class="col-lg-12 corps" >
+                <ng-include src ="'commonbusinessentities/classificationarchive/tmplClassificationArchiveDetail.tpl.html'">
+                </ng-include>
+            </div>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-doob" ng-click="save()" ng-disabled="!canSave()">{{localization.getMessage('common.save')}}</button>
+        <button class="btn btn-doob" ng-click="revert()" ng-disabled="!canRevert()">{{localization.getMessage('common.clear')}}</button>
+        <button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+    </div>
+</div>

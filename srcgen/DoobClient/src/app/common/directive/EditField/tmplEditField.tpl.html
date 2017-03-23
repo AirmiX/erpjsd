@@ -1,0 +1,59 @@
+<div ng-controller="ctrlEditField">
+	<div ng-hide="fieldModel.notVisible">
+		<!--div>{{localization.getMessage(fieldModel.label)}}:</div-->
+    <label class="col-sm-5 control-label">{{localization.getMessage(fieldModel.label)}}</label>
+    <div class="col-sm-7" ng-if="fieldModel.type=='text'">
+        <textarea ng-if="fieldModel.multiline" type="text" cols="40" rows="5" ng-model="item[fieldModel.name]"/>
+        <input class="form-control input-sm m-b-xs" ng-if="!fieldModel.multiline && !fieldModel.dateFormat" ng-disabled="fieldModel.disabled" type="text" ng-model="item[fieldModel.name]" ng-blur="validateKey(fieldModel)"/>
+        <div ng-if="fieldModel.dateFormat" class="row">
+          <div class="col-md-6" ng-disabled="fieldModel.disabled">
+            <p class="input-group">
+              <input type="text" class="form-control" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy" datepicker-popup="{{fieldModel.dateFormat}}" ng-model="item[fieldModel.name]" is-open="opened" datepicker-options="dateOptions" close-text="Close" show-button-bar="false"/>
+              <span class="input-group-btn">
+              <button type="button" class="btn btn-doob" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+        </div>
+        <span class="text-danger" ng-if="error"><i class="fa fa-exclamation-triangle"></i> {{error}}</span>
+        <!--span ng-if="error">{{error}}</span-->
+    </div>
+    <div class="col-sm-7" ng-if="fieldModel.type=='checkbox'">
+      <div class="checkbox checkbox-info">
+        <input id="checkbox{{$index}}" type="checkbox" ng-disabled="fieldModel.disabled" ng-model="item[fieldModel.name]">
+        <label for="checkbox{{$index}}"></label>
+      </div>
+    </div>
+    <div class="col-sm-7" ng-if="fieldModel.type=='combobox'" >
+			<select class="form-control m-b" ng-disabled="fieldModel.disabled" ng-model="item[fieldModel.name]"  ng-options="enum for enum in fieldModel.enumValues"
+			ng-init="item[fieldModel.name]=item[fieldModel.name]?item[fieldModel.name]:fieldModel.enumValues[0]" ng-required></select>
+		</div>
+		<!--div ng-if="fieldModel.type=='text'">
+			<textarea ng-if="fieldModel.multiline" type="text" cols="40" rows="5" ng-model="item[fieldModel.name]"/>
+			<input ng-if="!fieldModel.multiline && !fieldModel.dateFormat" ng-disabled="fieldModel.disabled" type="text" ng-model="item[fieldModel.name]"/>
+
+			<div ng-if="fieldModel.dateFormat" class="row">
+				<div class="col-md-6" ng-disabled="fieldModel.disabled">
+					<p class="input-group">
+					  <input type="text" class="form-control" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy" datepicker-popup="{{fieldModel.dateFormat}}" ng-model="item[fieldModel.name]" is-open="opened" datepicker-options="dateOptions" close-text="Close" show-button-bar="false"/>
+					  <span class="input-group-btn">
+						<button type="button" class="btn btn-doob" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+					  </span>
+					</p>
+				</div>
+			</div>
+
+			<span ng-if="error">{{error}}</span>
+		</div>
+
+		<div ng-if="fieldModel.type=='checkbox'"><input type="checkbox" ng-disabled="fieldModel.disabled" ng-model="item[fieldModel.name]"/></div-->
+		
+		<!-- <select ng-if="fieldModel.type=='combobox'" ng-model="$parent.item[fieldModel.name]"
+			ng-options="fieldModel.enumValues.indexOf(enumVal) as enum for enumVal in fieldModel.enumValues" /> -->
+		<!-- <select ng-if="fieldModel.type=='combobox'" ng-model="item[fieldModel.name]" ng-options="enum as enum for enum in fieldModel.enumValues"></select> -->
+		<!--div ng-if="fieldModel.type=='combobox'" >
+			<select ng-disabled="fieldModel.disabled" ng-model="item[fieldModel.name]"  ng-options="enum for enum in fieldModel.enumValues"
+			ng-init="item[fieldModel.name]=item[fieldModel.name]?item[fieldModel.name]:fieldModel.enumValues[0]" ng-required></select>
+		</div-->
+	</div>
+</div>

@@ -1,0 +1,17 @@
+<div class="btn-toolbar animated-panel zoomIn">
+    <div class="btn-group clearfix">
+        <button type="button" ng-click="openEditDialog(true)" class="btn btn-sm btn-doob">
+            <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.new')}}
+        </button>
+    </div>
+    <div class="btn-group clearfix">
+        <button type="button" ng-disabled="itemEdit == null" ng-click="remove(itemEdit)" class="btn btn-sm btn-doob btn-group">
+            <i class="glyphicon glyphicon-remove-circle"></i> {{localization.getMessage('button.remove')}}
+        </button>
+    </div>
+    <div class="btn-group clearfix">
+        <button type="button" ng-disabled="itemEdit == null" ng-click="openEditDialog(false)" class="btn btn-sm btn-doob">
+            <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('button.update')}}
+        </button>
+    </div>
+</div>

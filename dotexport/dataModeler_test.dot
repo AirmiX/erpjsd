@@ -1,0 +1,16 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+4455546320[label="{OccupationDemand:Entity|+class:unicode='oracle.dbtools.crest.model.design.logical.Entity'\l+directorySegmentName:unicode='seg_0'\l+id:unicode='0EA94B98-2591-6F8D-3A89-6462557CFE5C'\l+createdBy:unicode='Borko'\l+year:float=2016.0\l+month:float=1.0\l+day:float=13.0\l+hour:float=11.0\l+min:float=23.0\l+sec:float=42.0\l+comment:unicode='humanResources'\l+key:unicode='85513F72-7995-E441-AD4A-6408CF5C4E76'\l+value:unicode='true'\l}"]
+
+}

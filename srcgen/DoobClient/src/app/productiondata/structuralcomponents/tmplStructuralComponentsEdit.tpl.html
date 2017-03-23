@@ -1,0 +1,141 @@
+<div class="inmodal">
+    <div class="color-line"></div>
+    <div class="modal-header">
+        <h4 class="modal-title">{{localization.getMessage('productiondata.structuralComponents.edit')}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCLevel')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.SCLevel" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCOrdinalNumberAtLevel')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.SCOrdinalNumberAtLevel" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCVariantNumber')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.SCVariantNumber" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCNormativUgradnje')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.SCNormativUgradnje" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCSupplyingStatus')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.SCSupplyingStatus" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCWastePlannedPercentage')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.SCWastePlannedPercentage" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCFictiveProductIndicator')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="number" ng-model="itemEdit.SCFictiveProductIndicator" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCValidStartDate')}}
+<span class="required">*</span>                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpSCValidStartDate">
+                                <span ng-click="open($event, 'openedSCValidStartDate')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.SCValidStartDate" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.SCValidStartDate.dateFormat}}" is-open="openedSCValidStartDate" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCValidEndDate')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpSCValidEndDate">
+                                <span ng-click="open($event, 'openedSCValidEndDate')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.SCValidEndDate" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.SCValidEndDate.dateFormat}}" is-open="openedSCValidEndDate" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCEnteredBy')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.SCEnteredBy" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCEntryDate')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpSCEntryDate">
+                                <span ng-click="open($event, 'openedSCEntryDate')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.SCEntryDate" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.SCEntryDate.dateFormat}}" is-open="openedSCEntryDate" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCModifiedBy')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <input type="text" ng-model="itemEdit.SCModifiedBy" class="form-control input-sm m-b-xs" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">{{localization.getMessage('productiondata.structuralComponents.sCModificationDate')}}
+                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group date m-b-xs" id="dtpSCModificationDate">
+                                <span ng-click="open($event, 'openedSCModificationDate')" class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                                <input type="text" ng-model="itemEdit.SCModificationDate" class="form-control input-sm" ui-date="{dateFormat: 'dd/MM/yyyy'}" ui-date-format="dd/MM/yyyy"
+                                    datepicker-popup="{{itemEdit.SCModificationDate.dateFormat}}" is-open="openedSCModificationDate" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <p><span class="required">*</span> {{localization.getMessage('common.requiredField')}}</p>
+            </div>
+        </div>
+        <div class ="row">
+    		<div class="col-lg-12 corps" >
+                <ng-include src ="'productiondata/structuralcomponents/tmplStructuralComponentsDetail.tpl.html'">
+                </ng-include>
+            </div>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-doob" ng-click="save()" ng-disabled="!canSave()">{{localization.getMessage('common.save')}}</button>
+        <button class="btn btn-doob" ng-click="revert()" ng-disabled="!canRevert()">{{localization.getMessage('common.clear')}}</button>
+        <button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+    </div>
+</div>

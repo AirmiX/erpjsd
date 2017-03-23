@@ -1,0 +1,89 @@
+
+                <tabset>
+                     <tab  heading={{localization.getMessage('administration.users')}}> 
+                        <br/>
+                        <div ng-if="itemEdit.appUsers.length>0">
+                            <table  st-table="collectionDisplay" st-safe-src="itemEdit.appUsers"   class="items fixed-header">
+                                 <thead>
+                                    <tr>                                        
+                                        <th 
+                                         lr-drag-src="headers"  lr-drop-target="headers" st-sort="UIdentificationCode" st-skip-natural="true">
+                                            {{localization.getMessage('administration.users.identificationCode')}}
+                                        </th>
+                                        <th 
+                                         lr-drag-src="headers"  lr-drop-target="headers" st-sort="UUsername" st-skip-natural="true">
+                                            {{localization.getMessage('administration.users.username')}} 
+                                        </th>                                      
+                                    </tr>
+                                    <tr >
+                                        <th ng-repeat = "prop in propsUser">
+                                            <input st-search="{{prop}}" class="input-sm form-control" type="search"/>
+                                        </th> 
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    
+                                    <tr ng-repeat="currentRow in collectionDisplay" st-select-row="currentRow"  ng-click = "selection(currentRow, $index)">                  
+                                        <td >
+                                            {{currentRow.UIdentificationCode}}
+                                        </td>  
+                                        <td >
+                                            {{currentRow.UUsername}}
+                                        </td>                                 
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                        <div ng-if="itemEdit.appUsers.length == 0">
+                            {{localization.getMessage('common.noEntities')}}
+                        </div>
+                        
+                    </tab>
+                    <tab  heading={{localization.getMessage('administration.serviceGroups')}}> 
+                        <br/>
+                        <div ng-if="serviceGroups.length>0">
+                            <table  st-table="collectionDisplay" st-safe-src="serviceGroups"   class="items fixed-header">
+                                <thead>
+                                    <tr>                                     
+                                        <th 
+                                         lr-drag-src="headers"  lr-drop-target="headers" st-sort="SGIdentificationCode" st-skip-natural="true">
+                                            {{localization.getMessage('administration.serviceGroups.identificationCode')}}
+                                        </th>
+                                        <th 
+                                         lr-drag-src="headers"  lr-drop-target="headers" st-sort="SGName" st-skip-natural="true">
+                                            {{localization.getMessage('administration.serviceGroups.name')}} 
+                                        </th>                                      
+                                    </tr>
+                                    <tr >
+                                        <th ng-repeat = "prop in propsServiceGroups">
+                                            <input st-search="{{prop}}" class="input-sm form-control" type="search"/>
+                                        </th> 
+                                    </tr> 
+                                </thead>
+                                <tbody>                                                                       
+                                                                      
+                                    <tr ng-repeat="currentRow in collectionDisplay"  >   
+                                        <td >
+                                            {{currentRow.SGIdentificationCode}}
+                                        </td>  
+                                        <td >
+                                            {{currentRow.SGName}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                        <div ng-if="serviceGroups.length == 0">
+                            {{localization.getMessage('common.noEntities')}}
+                        </div>
+                        
+                        <div ng-show="mode == 'edit'">
+                            <button type="button" ng-click="openChooseDialogServiceGroups()" class="btn btn-sm btn-doob">
+                                <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                            </button>
+                        </div>
+                    </tab>
+                </tabset> 
+            

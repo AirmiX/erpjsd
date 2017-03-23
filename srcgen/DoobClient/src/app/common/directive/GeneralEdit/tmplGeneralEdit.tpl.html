@@ -1,0 +1,36 @@
+<div ng-controller="ctrlGeneralEdit">
+	<form novalidate>
+		<div class="modal-header">
+			<h3 class="modal-title">{{localization.getMessage(model.label)}} Edit</h3>
+		</div>
+		<div class="modal-body">
+			<!--div ng-repeat="fieldModel in model.fields">
+				<div ng-edit-field field-model="fieldModel" item="itemEdit" error="errors[fieldModel.name]" ></div>
+			</div-->
+      <div class="row">
+        <div class="form-horizontal col-lg-6">
+          <div ng-repeat="fieldModel in model.fields">
+            <div ng-edit-field field-model="fieldModel" item="itemEdit" model="model" validpk="validpk" service="service" error="errors[fieldModel.name]" ></div> 
+          </div>
+        </div>
+      </div>
+			<hr/ ng-show = "model.relationships.length !== 0">
+			<tabset ng-show = "model.relationships.length !== 0">
+				<tab ng-repeat="relationshipModel in model.relationships" heading="{{localization.getMessage(relationshipModel.label)}}">
+					<div ng-show-relationship
+					relationship-model="relationshipModel" 
+					global-model="model"
+					relationship-item="itemEdit[relationshipModel.name]"
+					global-item="itemEdit"
+					ng-if="itemEdit[relationshipModel.name]!==undefined"
+					/>
+				</tab>
+			</tabset>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" ng-disabled="!validate()" class="btn btn-doob" ng-click="save()">{{localization.getMessage('common.save')}}</button>
+			<button class="btn btn-doob" ng-click="undoChanges()">{{localization.getMessage('common.clear')}}</button>
+			<button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+		</div>
+	</form>  
+</div>

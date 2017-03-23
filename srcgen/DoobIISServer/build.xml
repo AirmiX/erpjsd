@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Vezbe09" basedir=".">
+
+	<property file="build.properties" />
+
+	<property name="build" value="${basedir}/build" />
+	<property name="dist" value="${basedir}/dist" />
+	<property name="docs" value="${basedir}/docs" />
+	<property name="lib" value="${basedir}/WebContent/WEB-INF/lib" />
+	<property name="src" value="${basedir}/src" />
+	<property name="web" value="${basedir}/WebContent" />
+
+	<path id="classpath">
+	    <fileset dir="${lib}" includes="*.jar"/>
+	<!--	<fileset dir="lib" includes="*.jar"/> -->
+		<fileset dir="${tomee.dir}/lib" includes="*.jar"/>
+	</path>
+	
+	<!-- Delete all built files -->
+	<target name="clean">
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+		<delete file="${tomee.dir}/webapps/${warname}"/>
+		<delete dir="${tomee.dir}/webapps/${dirname}"/>
+	</target>
+	
+	<target name="check-tomee" unless="tomee.dir" >
+		<fail>
+			Property "tomee.dir" is not set. Please use the file
+			"build.properties" in this directory ${basedir} to
+			set this property. It must point to the directory which
+			contains the following directory: "bin", "conf", "webapps"
+			etc.
+		</fail>
+	</target>
+	
+	<target name="check-environment">
+		<antcall target="check-tomee" />
+	</target>
+
+	<target name="init" depends="check-environment">
+		<mkdir dir="${build}"/>
+		<mkdir dir="${dist}"/>
+		<echo message="java.home = ${java.home}" />
+		<echo message="tomee.dir = ${tomee.dir}" />
+	</target>
+
+	<!-- Compile everything -->
+	<target name="compile" depends="init">
+	    <javac includeantruntime = "false" srcdir="${src}" destdir="${build}" classpathref="classpath" debug="true" />	
+		<copy todir="${build}">
+			<fileset dir="${src}" includes="**/*.properties"/>
+			<fileset dir="${src}" includes="**/*.xml"/>
+		</copy>
+	</target>
+	
+	<!-- War -->
+	<target name="war" depends="compile">
+		<war destfile="${dist}/${warname}" webxml="${web}/WEB-INF/web.xml">
+		  <lib dir="${lib}" includes="*.jar" />
+	      <classes dir="${build}" />
+		  <zipfileset dir="WebContent/WEB-INF" includes="*.xml" prefix="WEB-INF">
+		     <exclude name="web.xml"/>
+		  </zipfileset>
+		  <zipfileset dir="${web}/META-INF" includes="*.xml" prefix="META-INF" />	  	
+	    </war>
+	</target>
+	
+	<!-- Deploy  -->
+	<target name="deploy" depends="clean, war">
+	<!--	<copy todir="${tomee.dir}/lib">
+			<fileset dir="${lib}" includes="*.jar" />
+		</copy> 
+	-->
+		<copy todir="${tomee.dir}/webapps">
+			<fileset dir="${dist}" includes="${warname}" />
+		</copy>		
+	</target>
+	
+</project>

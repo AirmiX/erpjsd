@@ -1,0 +1,48 @@
+<div class="col-lg-4 animated-panel zoomIn" ng-if="mode != 'edit'">
+    <form class="form-horizontal">
+        <fieldset ng-disabled="true">
+            <div class="col-lg-12" ng-disabled="true">
+                <div ng-repeat="property in itemDefinition.properties" class="form-group">
+                    <label class="col-sm-5 control-label">{{localization.getMessage(itemDefinition.label + '.' + property.label)}}</label>
+                    <div class="col-sm-7 padding-7">
+                        <input type="text" class="form-control input-xs m-b-xs" value="{{itemEdit[property.name]}}" />
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="corps animated-panel zoomIn" ng-class="{'col-lg-8':(mode != 'edit')}">
+    <tabset>
+        <tab heading="{{localization.getMessage('productiondata.controlDemands.productionProcessStep')}}">
+            <div class="modal-body" ng-if="!(itemEdit['productionProcessStep'])">
+                {{localization.getMessage('common.noEntities')}}
+            </div>
+            <div class="modal-body" ng-if="itemEdit['productionProcessStep']">
+                <table st-table="productionProcessStepCollection" st-safe-src="itemEdit['productionProcessStep']" class="items fixed-header fixed-header-detail">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="property in productionProcessStepDefinition.properties"
+                             lr-drag-src="headers" lr-drop-target="headers" st-sort="{{property.name}}" st-skip-natural="true">
+                                {{localization.getMessage(productionProcessStepDefinition.label + '.' + property.label)}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="property in productionProcessStepDefinition.properties">
+                                <span ng-if="!property.dateFormat">{{itemEdit['productionProcessStep'][property.name]}}</span>
+                                <span ng-if="property.dateFormat">{{itemEdit['productionProcessStep'][property.name] | date:property.dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body" ng-if="mode == 'edit'">
+                <button type="button" ng-click="openChooseProductionProcessStepDialog()" class="btn btn-sm btn-doob">
+                    <i class="glyphicon glyphicon-pencil"></i> {{localization.getMessage('common.choose')}}
+                </button>
+            </div>
+        </tab>
+    </tabset>
+</div>

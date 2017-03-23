@@ -1,0 +1,51 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+140279593241200[ label="{SimpleType|+name:ID\l}"]
+
+140279593394160 -> 140279593241200[arrowtail=diamond, dir=both, headlabel="simple_types 0..*"]
+140279593394160 -> 140279593404432[arrowtail=diamond, dir=both, headlabel="entities 1..*"]
+140279593394160[ label="{EntityModel|}"]
+
+140279593422656[ label="{*Type|}"]
+140279593422656 -> 140279593241200 [dir=back]
+140279593422656 -> 140279593404432 [dir=back]
+
+140279593414816 -> 140279593422656[headlabel="type "]
+140279593414816[ label="{Property|+name:ID\l}"]
+
+140279593404432 -> 140279593414816[arrowtail=diamond, dir=both, headlabel="properties 1..*"]
+140279593404432[ label="{Entity|+name:ID\l}"]
+
+140279593247280[ label="{STRING|}"]
+
+140279593261248[ label="{BASETYPE|}"]
+140279593261248 -> 140279593257840 [dir=back]
+140279593261248 -> 140279593249920 [dir=back]
+140279593261248 -> 140279593244640 [dir=back]
+140279593261248 -> 140279593247280 [dir=back]
+
+140279593252560[ label="{INT|}"]
+
+140279593255200[ label="{FLOAT|}"]
+
+140279593257840[ label="{NUMBER|}"]
+140279593257840 -> 140279593255200 [dir=back]
+140279593257840 -> 140279593252560 [dir=back]
+
+140279593249920[ label="{BOOL|}"]
+
+140279593244640[ label="{ID|}"]
+
+
+}

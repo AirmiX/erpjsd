@@ -1,0 +1,23 @@
+package com.doobgroup.server.sessionbeans.{{entity.module.name|lower}};
+
+import com.doobgroup.server.entities.{{entity.module.name|lower}}.{{entity.name}}Bean;
+{% if not entity is has_items %}
+import com.doobgroup.server.sessionbeans.common.GenericDaoPag;
+
+public interface {{entity.name}}BeanDaoLocal extends GenericDaoPag<{{entity.name}}Bean, Long>  {
+
+}
+{% else %}
+import com.doobgroup.server.sessionbeans.common.GenericDao;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+
+import com.doobgroup.server.util.RestrictSoftDeleteException;
+
+public interface {{entity.name}}BeanDaoLocal extends GenericDao<{{entity.name}}Bean, Long>  {
+
+    public {{entity.name}}Bean crudEager({{entity.name}}Bean entity, String dmlOperation) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException, RestrictSoftDeleteException;
+
+}
+{% endif %}

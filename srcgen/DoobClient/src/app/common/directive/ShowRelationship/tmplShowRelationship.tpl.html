@@ -1,0 +1,44 @@
+<div>
+    <div>
+        <br/>
+        <div ng-if="relationshipItem && relationshipItem.length!==0">
+            <table st-table="currentDisplay"  st-safe-src="relationshipItem" class="items narrowTable">
+                <thead>
+                    <tr>
+                        <th ng-repeat="field in relationshipModel.entity.fields" ng-if="field.important"
+                         lr-drag-src="headers"  lr-drop-target="headers" st-sort="{{field.name}}" st-skip-natural="true">
+                            {{localization.getMessage(field.label)}}
+                        </th>
+                    </tr>
+                    <tr ng-if="relationshipItem.length>10">
+                        <th colspan="{{colSpan}}"><input st-search="" class="form-control" placeholder="Search ..." type="text"/></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="currentRow in currentDisplay">
+                        <td ng-repeat="field in relationshipModel.entity.fields" ng-if="field.important">
+                            {{currentRow[field.name]}}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot ng-if="relationshipItem.length>10">
+                    <tr>
+                        <td colspan="{{colSpan}}" class="text-center">
+                            <div st-pagination="" st-items-by-page="10"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div ng-if="!(relationshipItem && relationshipItem.length!==0)">
+        {{localization.getMessage('common.noEntities')}}
+        </div>
+        <br/>
+        <div ng-if="relationshipModel.editable" ng-edit-relationship-button 
+        relationship-model="relationshipModel" 
+        global-model="globalModel" 
+        relationship-item="relationshipItem"
+        global-item="globalItem"
+        />
+    </div>
+</div>

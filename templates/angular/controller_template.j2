@@ -1,0 +1,408 @@
+'use strict';
+
+angular.module('Doob.{{view.entity.module.name|lower}}')
+
+{% if not view.dependent %}
+
+.controller('ctrl{{view.entity.name}}',['$scope', '$rootScope', '$modal', 'dialogs', 'CheckSelected', 'Service{{view.entity.name}}',
+    function($scope, $rootScope, $modal, dialogs, CheckSelected, Service{{view.entity.name}}) {
+
+	// main entity ({{view.entity.name|firstlower}}) properties names and labels
+	$scope.itemDefinition = {
+		label: '{{view.entity.module.label}}.{{view.entity.label}}',
+		properties: [
+        {% for property in view.properties %}
+			{ label: '{{property.label}}', name:'{{property.property.name}}', inTable: {% if property.important %} true {% else %} false {% endif %} },
+        {% endfor %}
+		]
+	};
+
+    {% for relationship in view.relationships %}
+	// {{relationship.name}} with properties names and labels
+	$scope.{{relationship.name}}Definition = {
+		label: '{{relationship.view.entity.module.label}}.{{relationship.view.entity.label}}',
+		properties : [
+        {% for property in relationship.view.properties | selectattr("important", "equalto", true) %}
+			{ label: '{{property.label}}', name:'{{property.property.name}}' },
+        {% endfor %}
+		]
+	};
+    {% endfor %}
+
+	// fill table with data
+	$scope.items = [];
+	$scope.loaded = false;
+	var get{{view.entity.name}}s = function() {
+		if(!$scope.loaded && $scope.items.length === 0) {
+			$scope.isLoading = true;
+			Service{{view.entity.name}}.query(function(data) {
+				$scope.items = data;
+				$scope.isLoading = false;
+				$scope.loaded = true;
+			});
+		}
+	};
+	get{{view.entity.name}}s();
+
+	// table selection logic
+	$scope.itemEdit = null;
+
+	$scope.selection = function(item, index) {
+		if(item.isSelected) {
+			if($scope.itemEdit !== null) {
+				var index1 = $scope.items.map(function(it) { return it.id; }).indexOf($scope.itemEdit.id);
+				$scope.items[index1].isSelected = false;
+			}
+			item.$getEager(function(item) {
+				$scope.itemEdit = item;
+			});
+		} else {
+			$scope.itemEdit = null;
+			item.isSelected = false;
+		}
+	};
+
+	$scope.$watch('{{view.entity.name}}Collection', function() {
+		$scope.itemEdit = CheckSelected.checkSelectedInTable($scope.itemEdit, $scope.{{view.entity.name}}Collection, $scope.items);
+	});
+
+	// Remove button
+	$scope.remove = function(item) {
+		$rootScope.sweetAlert.swal($rootScope.swalOptions, function(isConfirm) {
+			if(isConfirm) {
+				item.$remove(function() {
+					var removeIndex = $scope.items.map(function(it) { return it.id; }).indexOf(item.id);
+					$scope.items.splice(removeIndex, 1);
+					$scope.itemEdit = null;
+					$rootScope.deleteConfirmationDialog();
+				});
+			}
+			window.onkeydown = null;
+			window.onfocus = null;
+		});
+	};
+
+	// New/Update dialog
+	$scope.openEditDialog = function(isNew) {
+		$modal.open(
+		{
+			backdrop: 'static',
+			keyboard : false,
+			templateUrl: '{{view.entity.module.name|lower}}/{{view.entity.name|lower}}/tmpl{{view.entity.name}}Edit.tpl.html',
+			size: 'lg',
+			windowClass: 'hmodal-info',
+			controller: 'ctrl{{view.entity.name}}Edit',
+			resolve: {
+				itemEdit: function() {
+					if(isNew) {
+						return new Service{{view.entity.name}}();
+					} else {
+						return $scope.itemEdit;
+					}
+				},
+                {% for relationship in view.relationships %}
+				{{relationship.name}}Definition: function() {
+					return $scope.{{relationship.name}}Definition;
+				},
+                {% endfor %}
+			}
+		})
+		.result.then(function(result) {
+			if(!angular.isDefined(result.id)) {
+				Service{{view.entity.name}}.saveCustom('stockmanagement/{{view.entity.name|lower}}s', result, function(savedObject) {
+					$scope.items.unshift(savedObject);
+					if($scope.itemEdit !== null) {
+						var index = $scope.items.map(function(it) { return it.id; }).indexOf($scope.itemEdit.id);
+						$scope.items[index].isSelected = false;
+					}
+					$scope.itemEdit = angular.extend(savedObject);
+					$scope.items[0].isSelected = true;
+				});
+			 } else {
+				 Service{{view.entity.name}}.updateCustom('stockmanagement/{{view.entity.name|lower}}s/'+result.id, result, function(savedObject) {
+					$scope.itemEdit = angular.extend(savedObject);
+					var index = $scope.items.map(function(it) { return it.id; }).indexOf(savedObject.id);
+					for(var key in result) {
+						$scope.items[index][key] = savedObject[key];
+					}
+					$scope.items[index].isSelected = true;
+				 });
+			 }
+		});
+	};
+}])
+
+{% endif %}
+
+.controller('ctrl{{view.entity.name}}Edit',['$scope', 'Localization', '$modal', '$modalInstance', 'dialogs',
+	'Service{{view.entity.name}}', {% for entity in get_distinct_relationship_entities(view) %}'Service{{entity.name}}', {% endfor %}
+    {% if not view.dependent %} {% for relationship in view.relationships %} '{{relationship.name}}Definition', {% endfor %} {% endif %} 'itemEdit',
+function($scope, Localization, $modal, $modalInstance, dialogs,
+	Service{{view.entity.name}}, {% for entity in get_distinct_relationship_entities(view) %}Service{{entity.name}}, {% endfor %}
+	{% for relationship in view.relationships %} {{relationship.name}}Definition, {% endfor %} itemEdit) {
+
+	// dialog mode
+	$scope.mode = 'edit';
+
+	// original item state
+	var original = angular.copy(itemEdit);
+	// item state
+	$scope.itemEdit = angular.copy(original);
+
+    {% if not view.dependent %}
+        {% for relationship in view.relationships %}
+	// {{relationship.name}} with properties
+	$scope.{{relationship.name}}Definition = {{relationship.name}}Definition;
+        {% endfor %}
+    {% else %}
+        {% for relationship in view.relationships %}
+    // {{relationship.name}} with properties names and labels
+    $scope.{{relationship.name}}Definition = {
+        label: '{{relationship.view.labelPrefix}}',
+        properties : [
+        {% for property in relationship.view.properties %}
+            { label: '{{property.label}}', name:'{{property.property.name}}' },
+        {% endfor %}
+        ]
+    };
+        {% endfor %}
+    {% endif %}
+
+	// datepicker logic
+
+	// date properties
+    {% for property in view.properties %}
+        {% if property.type == 'date' %}
+	$scope.opened{{property.property.name}} = false;
+        {% endif %}
+    {% endfor %}
+
+	$scope.open = function($event, opened) {
+		$event.preventDefault();
+		$event.stopPropagation();
+		$scope[opened] = true;
+	};
+
+    {% for property in view.properties %}
+        {% if property.type == 'select' %}
+	// fill the {{property.property.name}} Options combobox
+	$scope.{{property.property.name}}Options = [
+        { name: 'prva', label: 'Prva' },
+        { name: 'druga', label: 'Druga' },
+        { name: 'treca', label: 'Treca' }
+	];
+        {% endif %}
+    {% endfor %}
+
+    {% for relationship in view.relationships %}
+        {% if relationship.type == 'one(choose)' or relationship.type == 'one(select)' %}
+
+	// Choose {{relationship.name}}
+	$scope.openChoose{{relationship.name|firstupper}}Dialog = function() {
+        $modal.open({
+            backdrop: 'static',
+            keyboard : false,
+            templateUrl: '{{relationship.view.entity.module.name|lower}}/{{view.entity.name|lower}}/tmpl{{relationship.view.entity.name}}Choose.tpl.html',
+            size: 'lg',
+            controller: 'ctrl{{relationship.view.entity.name}}Choose',
+            windowClass: 'hmodal-info',
+            resolve: {
+				itemEdit: function() {
+					if(angular.isDefined($scope.itemEdit.{{relationship.name}})){
+						return $scope.itemEdit.{{relationship.name}};
+					}
+				}
+			}
+		}).result.then(function(result) {
+			$scope.itemEdit.{{relationship.name}} = angular.copy(result);
+		});
+    };
+
+        {% elif relationship.type == 'many(crud)'  %}
+
+    $scope.{{relationship.view.entity.name|firstlower}}Edit = null;
+
+    // {{relationship.name}} table selection logic
+    $scope.{{relationship.view.entity.name|firstlower}}Selection = function(item, index) {
+        if(item.isSelected) {
+            if($scope.{{relationship.view.entity.name|firstlower}}Edit !== null) {
+                var index1 = $scope.itemEdit.{{relationship.name}}.map(function(it) { return it.id; }).indexOf($scope.{{relationship.view.entity.name|firstlower}}Edit.id);
+                $scope.itemEdit.{{relationship.name}}[index1].isSelected = false;
+            }
+            $scope.{{relationship.view.entity.name|firstlower}}Edit = item;
+        } else {
+            $scope.{{relationship.view.entity.name|firstlower}}Edit = null;
+            item.isSelected = false;
+        }
+    };
+
+    // New/Edit {{relationship.name}} dialog
+    $scope.open{{relationship.view.entity.name}}EditDialog = function(isNew) {
+        $modal.open({
+            backdrop: 'static',
+            keyboard : false,
+            templateUrl: '{{relationship.view.entity.module.name|lower}}/{{view.entity.name|lower}}/tmpl{{relationship.view.entity.name}}Edit.tpl.html',
+            size: 'lg',
+            controller: 'ctrl{{relationship.view.entity.name}}Edit',
+            windowClass: 'hmodal-info',
+            resolve: {
+                itemEdit: function() {
+                    if(isNew) {
+                        return new Service{{relationship.view.entity.name}}();
+                    } else {
+                        return $scope.{{relationship.view.entity.name|firstlower}}Edit;
+                    }
+                }
+            }
+        }).result.then(function(result) {
+            var i;
+            if(isNew) {
+                if(!angular.isDefined($scope.itemEdit.{{relationship.name}})) {
+                    $scope.itemEdit.{{relationship.name}} = [];
+                }
+                $scope.itemEdit.{{relationship.name}}.unshift(result);
+                for(i in $scope.itemEdit.{{relationship.name}}) {
+                    $scope.itemEdit.{{relationship.name}}[i].isSelected = false;
+                }
+                $scope.{{relationship.view.entity.name|firstlower}}Edit = angular.extend(result);
+                $scope.itemEdit.{{relationship.name}}[0].isSelected = true;
+            }
+            else {
+                for(i in $scope.itemEdit.{{relationship.name}}) {
+                    $scope.itemEdit.{{relationship.name}}[i].isSelected = false;
+                }
+                $scope.{{relationship.view.entity.name|firstlower}}Edit = angular.extend(result);
+                var index = $scope.itemEdit.{{relationship.name}}.map(function(it) { return it.id; }).indexOf(result.id);
+                for(var key in result) {
+                    $scope.itemEdit.{{relationship.name}}[index][key] = result[key];
+                }
+                $scope.itemEdit.{{relationship.name}}[index].isSelected = true;
+            }
+        });
+    };
+
+    $scope.remove{{relationship.view.entity.name}} = function(item) {
+        var dialog = dialogs.confirm('Please confirm', 'Are you sure you want to delete item?');
+        dialog.result.then(function(btn) {
+            var removeIndex = $scope.itemEdit.{{relationship.name}}.map(function(it) { return it.id; }).indexOf(item.id);
+            $scope.itemEdit.{{relationship.name}}[removeIndex].deleted = true;
+        });
+    };
+
+        {% endif %}
+    {% endfor %}
+
+	// Save Button
+	$scope.save = function() {
+    {% for property in view.properties|selectattr("type", "equalto", "date") %}
+		correctDateTime($scope.itemEdit.{{property.property.name}});
+    {% endfor %}
+	   //	delete $scope.itemEdit.isSelected;
+    {% if view.relationships|selectattr("type", "equalto", "many")|list|length > 0 %}
+        var item;
+        var i;
+        {% for relationship in view.relationships|selectattr("type", "equalto", "many") %}
+        for(i in $scope.itemEdit.{{relationship.name}}) {
+    		item = $scope.itemEdit.{{relationship.name}}[i];
+    		delete item.isSelected;
+    	}
+        {% endfor %}
+    {% endif %}
+		$modalInstance.close($scope.itemEdit);
+	};
+
+    {% if view.properties|selectattr("type", "equalto", "date")|list|length > 0 %}
+    var correctDateTime = function(date) {
+        if(date instanceof Date && date !== '') {
+            date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+        }
+    };
+    {% endif %}
+
+	$scope.canSave = function() {
+        {% if view.properties|selectattr("required", "equalto", true)|list|length > 0 %}
+		var item = $scope.itemEdit;
+		return {% for property in view.properties|selectattr("required", "equalto", true) %}
+                item.{{property.property.name}} {% if not loop.last %} && {% endif %}
+               {% endfor %} ;
+        {% else %}
+        return true;
+        {% endif %}
+	};
+
+	// Clear and Close buttons
+	$scope.revert = function() {
+		$scope.itemEdit = angular.copy(original);
+	};
+
+	$scope.canRevert = function() {
+		return !angular.equals($scope.itemEdit, original);
+	};
+
+	$scope.cancel = function() {
+		$modalInstance.dismiss();
+	};
+
+}])
+
+
+.controller('ctrl{{view.entity.name}}Choose', ['$scope','Service{{view.entity.name}}', 'dialogs', '$modal', '$modalInstance', 'itemEdit',
+function($scope, Service{{view.entity.name}}, dialogs, $modal,  $modalInstance, itemEdit) {
+
+    // entity with properties
+    $scope.itemDefinition = {
+        label: '{{view.entity.module.label}}.{{view.entity.label}}',
+        properties: [
+        {% for property in view.properties %}
+            { label: '{{property.label}}', name:'{{property.property.name}}', inTable: {% if property.important %} true {% else %} false {% endif %} },
+        {% endfor %}
+        ]
+    };
+
+	$scope.items = [];
+	$scope.itemEdit = {};
+
+	// fill table with data
+	$scope.loaded = false;
+	var get{{view.entity.name}}s = function() {
+		if(!$scope.loaded && $scope.items.length === 0) {
+			$scope.isLoading = true;
+			Service{{view.entity.name}}.query(function(data) {
+				$scope.items = data;
+				$scope.isLoading = false;
+				$scope.loaded = true;
+				if(angular.isDefined(itemEdit)) {
+					var index = $scope.items.map(function(it) { return it.id; }).indexOf(itemEdit.id);
+					$scope.itemEdit = $scope.items[index];
+					$scope.lastId = itemEdit.id;
+				}
+				else {
+					$scope.itemEdit = {};
+					$scope.lastId = -1;
+				}
+			});
+		}
+	};
+	get{{view.entity.name}}s();
+
+	$scope.check = function(item) {
+		if ($scope.lastId !== item.id) {
+			$scope.itemEdit = item;
+			$scope.lastId = item.id;
+		}
+		else {
+			$scope.itemEdit = {};
+			$scope.lastId = -1;
+		}
+	};
+
+	$scope.choose = function() {
+		$modalInstance.close($scope.itemEdit);
+	};
+
+	$scope.cancel = function() {
+		$modalInstance.dismiss();
+	};
+
+}])
+;

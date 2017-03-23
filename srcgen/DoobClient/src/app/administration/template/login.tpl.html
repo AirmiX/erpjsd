@@ -1,0 +1,62 @@
+<!--div class="form-horizontal">
+    <form name="saveTemplateData" >
+        <div class="form-group">
+            <label class="control-label col-sm-2">{{ localization.getMessage('login.UUsername') }}</label>
+            <div class="col-sm-3">
+                <input type="text" ng-model="loginForm.UUsername" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">{{ localization.getMessage('login.UPassword') }}</label>
+            <div class="col-sm-3">
+                <input type="password" ng-model="loginForm.UPassword" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-3">
+                <input type="submit" class="submit" value="{{localization.getMessage('login.submit')}}" ng-click = "submitLoginForm()">
+            </div>
+        </div>
+        
+      </form>
+</div-->
+<div class="login-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center m-b-md">
+                <h3 class="white-color">PLEASE LOGIN TO DOOB ERP</h3>
+                <small class="white-color">DOOB Group ERP Solution!</small>
+            </div>
+            <div class="hpanel">
+                <div class="panel-body">
+                        <form>
+                            <div class="form-group">
+                                <label class="control-label" for="username">Username</label>
+                                <input ng-model="loginForm.UUsername" type="text" title="Please enter you username" required="" value="" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="password">Password</label>
+                                <input ng-model="loginForm.UPassword" type="password" title="Please enter your password" required="" value="" name="password" id="password" class="form-control">
+                                <!--span class="help-block small">Yur strong password</span-->
+                            </div>
+                            <!--div class="checkbox">
+                                <input type="checkbox" class="i-checks" checked>
+                                     Remember login
+                                <p class="help-block small">(if this is a private computer)</p>
+                            </div-->
+                            <br/>
+                            <div class="form-group">
+                                <button class="btn btn-doob btn-block" ng-click = "submitLoginForm()">Login</button>
+                            </div>
+                            <!--a class="btn btn-default btn-block" href="#">Register</a-->
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center white-color">
+            2016 Copyright Doob Group
+        </div>
+    </div>
+</div>

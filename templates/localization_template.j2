@@ -1,0 +1,271 @@
+'use strict';
+
+angular.module('resources.localization',['ngResource'])
+.factory('Localization', ['$window', '$rootScope', function($window, $rootScope){
+	var messages  = {
+		'sr': {
+            // ADMINISTRATION
+			'administration.profile.edit' : 'Izmena profile',
+			'administration.users' : 'Korisnici',
+			'administration.users.edit' : 'Izmena korisnika',
+			'administration.users.identificationCode' : 'Identifikacioni kod',
+			'administration.users.username' : 'Korisnicko ime',
+			'administration.users.password' : 'Lozinka',
+			'administration.users.language' : 'Jezik',
+			'administration.userGroups' : 'Korisnicke grupe',
+			'administration.userGroups.edit' : 'Izmena korisnicke grupe',
+			'administration.userGroups.identificationCode' : 'Identifikacioni kod',
+			'administration.userGroups.name' : 'Naziv',
+			'administration.serviceGroups' : 'Servis grupe',
+			'administration.serviceGroups.edit' : 'Izmena servis grupe',
+			'administration.serviceGroups.identificationCode' : 'Identifikacioni kod',
+			'administration.serviceGroups.name' : 'Naziv',
+			'administration.services' : 'Servisi',
+			'administration.services.path' : 'Uri',
+			'administration.services.method' : 'Metoda',
+			'administration.users.changePassword' : 'Izmena lozinke',
+			'administration.users.oldPassword' : 'Stara lozinka',
+			'administration.users.newPassword' : 'Nova lozinka',
+			'administration.users.confirmNewPassword' : 'Ponovljena nova lozinka',
+			'administration.users.passwordChanged' : 'Lozinka izmenjena uspesno',
+			'administration.users.passwordNotChanged' : 'Lozinka nije izmenjena uspesno',
+			'administration.users.invalidPassword' : 'Neispravna nova lozinka',
+            // COMON
+            'common.error':'Greska',
+			'common.error.unknown':'Operacija nije uspela! Greska u aplikaciji.',
+			'common.error.notLogged':'Morate biti ulogovani da biste izvrsili ovu akciju. Molimo ulogujte se.',
+			'common.error.noPermission':'Niste ovlasceni da izvrsite ovu operaciju. Molimo kontaktirajte administratora.',
+			'common.error.wrongPassword':'Neispravna lozinka! Promena lozinke nije uspela.',
+			'common.error.loginFailed':'Neispravno korisnicko ime ili lozinka',
+			'common.error.wrongEmail':'Neispravan email!',
+            'common.address':'Adresa',
+			'common.currentAddress':'Trenutna adresa',
+			'common.oldAddresses':'Prethodne adrese',
+			'common.addressContacts':'Adresa i kontakti',
+			'common.invalidDate':'Nije validan datum',
+			'common.success':'Uspesno',
+            'common.fullName':'Pun naziv',
+			'common.conditions':'Uslovi',
+			'common.notUnique': 'Nije jedinstvena vrednost!',
+            'common.startDate':'Datum pocetka',
+			'common.endDate':'Datum kraja',
+			'common.requiredField':'Polje je obavezno',
+			'common.save':'Sacuvaj',
+			'common.clear':'Ponisti',
+			'common.cancel':'Odustani',
+			'common.name':'Naziv',
+			'common.status':'Status',
+			'common.length':'Duzina',
+			'common.validStartDate':'Vazi od',
+			'common.validEndDate':'Vazi do',
+			'common.enteredBy':'Uneo',
+			'common.entryDate':'Datum unosa',
+			'common.modifiedBy':'Izmenio',
+			'common.modificationDate':'Datum izmene',
+			'common.variant':'Varijanta',
+			'common.choose':'Izaberi',
+			'common.enabled':'Omoguceno',
+			'common.notValidInteger':'Nije unesena celobrojna vrednost!',
+			'common.createDate':'Datum kreiranje',
+            // Login
+			'login.UUsername': 'Korisnicko ime',
+			'login.UPassword': 'Lozinka',
+			'login.submit':'Login',
+            // Button
+            'button.copy':'Kopiranje',
+            'button.new':'Novi',
+			'button.remove':'Ukloni',
+			'button.update':'Izmena',
+            // Placeholder
+            'placeholder.product':'Izaberi ili pretrazi proizvod iz liste...',
+			'placeholder.productionProcessType':'Izaberi vrstu tehnoloskog postupka...',
+			'placeholder.organizationUnit':'Izaberi organizacionu jedinicu...',
+			'placeholder.businessEntity':'Izaberite subjekta poslovanja',
+			'placeholder.organizationSchema':'Izaberite godinu organizacione seme',
+			'placeholder.workCenter':'Izaberi radni centar...',
+			'placeholder.resourceType':'Izaberi vrstu resursa',
+			'placeholder.occupation':'Izaberi zanimanje...',
+			'placeholder.qualityControl':'Izaberi kontrolu kvaliteta...',
+			'placeholder.stepClassification':'Izaberi klasifikaciju operacije...',
+			'placeholder.tool':'Izaberi alat...',
+			'placeholder.type':'Izaberi vrstu...',
+			'placeholder.material':'Izaberi materijal...',
+			'placeholder.paymentCondition':'Izaberi uslove placanja...',
+			'placeholder.currency':'Izaberite valutu...',
+			'placeholder.deliveryMethod':'Izaberite nacin isporuke...',
+			'placeholder.denotationMethod': 'Izaberite nacin oznacavanja ...',
+			'placeholder.paymentMethod': 'Izaberite nacin placanja ...',
+			'placeholder.productIdentification': 'Izaberite proizvod...',
+			'placeholder.packingMethod':'Izaberite metod pakovanja...',
+			'placeholder.market':'Izaberite trziste...',
+			'placeholder.commercialityStatus':'Izaberite status komercijalnosti...',
+			'placeholder.country':'Izaberite zemlju...',
+			'placeholder.orderCategory' : 'Izaberite kategoriju ...',
+			'placeholder.postOffice':'Izaberite postu...',
+			'placeholder.stockroom':'Izaberite skladiste zaliha...',
+			'placeholder.tangibleItemStatus':'Izaberite status materijalne stavke...',
+			'productionData.productionProcessType':'Vrsta tehnoloskog postupka',
+
+			// Menus and Submenus
+			{% for module in modules %}
+            'menu.{{ module.name|lower }}': '[SR] {{ module.name }}',
+                {% for entity in entities | selectattr("module", "equalto", module) %}
+            'submenu.{{ module.name|lower }}.{{ entity.name|firstlower }}': '[SR] {{ entity.name }}',
+                {% endfor %}
+            {% endfor %}
+
+            {% for view in views %}
+            // {{view.entity.name}}
+            '{{view.entity.module.label}}.{{view.entity.label}}' : '[SR] {{view.entity.name}}',
+            '{{view.entity.module.label}}.{{view.entity.label}}.edit' : '[SR] Edit {{view.entity.name}}',
+            '{{view.entity.module.label}}.{{view.entity.label}}.choose' : '[SR] Choose {{view.entity.name}}',
+                {% for property in view.properties %}
+            '{{view.entity.module.label}}.{{view.entity.label}}.{{property.label}}' : '[SR] {{property.label}}',
+                {% endfor %}
+                {% for relationship in view.relationships %}
+            '{{view.entity.module.label}}.{{view.entity.label}}.{{relationship.label}}' : '[SR] {{relationship.label}}',
+                {% endfor %}
+            {% endfor %}
+
+		},
+		'en':{
+            // ADMINISTRATION
+			'administration.users' : 'Users',
+			'administration.users.edit' : 'User Edit',
+			'administration.users.identificationCode' : 'Identification code',
+			'administration.users.username' : 'Username',
+			'administration.users.password' : 'Password',
+			'administration.users.language' : 'Language',
+            'administration.users.changePassword' : 'Change Password',
+			'administration.users.oldPassword' : 'Old Password',
+			'administration.users.newPassword' : 'New Password',
+			'administration.users.confirmNewPassword' : 'Confirm New Password',
+			'administration.users.passwordChanged' : 'Password changed succesfully',
+			'administration.users.passwordNotChanged' : 'Password not changed succesfully',
+			'administration.users.invalidPassword' : 'Invalid new password',
+			'administration.userGroups' : 'User Groups',
+			'administration.userGroups.edit' : 'User Group Edit',
+			'administration.userGroups.identificationCode' : 'Identification code',
+			'administration.userGroups.name' : 'Name',
+			'administration.serviceGroups' : 'Service Groups',
+			'administration.serviceGroups.edit' : 'Service Group Edit',
+			'administration.serviceGroups.identificationCode' : 'Identification code',
+			'administration.serviceGroups.name' : 'Name',
+			'administration.services' : 'Services',
+			'administration.services.path' : 'Uri',
+			'administration.services.method' : 'method',
+            // COMMON
+			'common.error':'Error',
+            'common.error.unknown':'Operacija nije uspela! Greska u aplikaciji.',
+			'common.error.notLogged':'Morate biti ulogovani da biste izvrsili ovu akciju. Molimo ulogujte se.',
+			'common.error.noPermission':'Niste ovlasceni da izvrsite ovu operaciju. Molimo kontaktirajte administratora.',
+			'common.error.wrongPassword':'Neispravna lozinka! Promena lozinke nije uspela.',
+			'common.error.loginFailed':'Neispravno korisnicko ime ili lozinka',
+			'common.error.wrongEmail':'Wrong email!',
+			'common.notUnique': 'Not unique value!',
+			'common.success':'Success',
+            'common.fullName':'Full name',
+            'common.requiredField':'Field is required',
+			'common.conditions':'Conditions',
+            'common.address':'Address',
+			'common.currentAddress':'Current Address',
+			'common.oldAddresses':'Old Addresses',
+			'common.addressContacts':'Address & Contacts',
+			'common.save':'Save',
+			'common.clear':'Clear',
+			'common.cancel':'Cancel',
+            'common.invalidDate':'Invalid date',
+            'common.startDate':'Start Date',
+			'common.endDate':'End Date',
+            'common.status':'Status',
+			'common.length':'Length',
+			'common.validStartDate':'Valid Start Date',
+			'common.validEndDate':'Valid End Date',
+			'common.enteredBy':'Entered By',
+			'common.entryDate':'Entry Date',
+			'common.modifiedBy':'Modified By',
+			'common.notValidInteger':'The value is not a valid integer!',
+			'common.modificationDate':'Modification Date',
+			'common.variant':'Variant',
+			'common.choose':'Choose',
+			'common.enabled':'Enabled',
+			'common.createDate':'Create Date',
+            'common.ordinalNumber':'Ordinal number',
+            // Login
+			'login.UUsername': 'Username',
+			'login.UPassword': 'Password',
+			'login.submit':'Login',
+            // Button
+			'button.new':'New',
+			'button.remove':'Remove',
+			'button.update':'Update',
+            'button.copy':'Copy',
+            // Placeholder
+			'placeholder.product':'Select or search a product in the list...',
+			'placeholder.productionProcessType':'Select production process type...',
+			'placeholder.organizationUnit':'Select or search a organization unit in the list...',
+			'placeholder.businessEntity':'Select or search a business entity in the list...',
+			'placeholder.organizationSchema':'Select or search organization schemas year',
+			'placeholder.workCenter':'Select work center...',
+			'placeholder.resourceType':'Select resource type',
+			'placeholder.occupation':'Select occupation...',
+			'placeholder.qualityControl':'Select quality control...',
+			'placeholder.stepClassification':'Select step classification...',
+			'placeholder.tool':'Select tool...',
+			'placeholder.type':'Select type...',
+			'placeholder.material':'Select material...',
+			'placeholder.paymentCondition':'Choose payment conditions...',
+			'placeholder.currency':'Choose currency...',
+			'placeholder.deliveryMethod':'Choose delivery method...',
+			'placeholder.denotationMethod': 'Choose denotation method ...',
+			'placeholder.paymentMethod': 'Choose payment method ...',
+			'placeholder.productIdentification': 'Choose product...',
+			'placeholder.packingMethod':'Choose packing method...',
+			'placeholder.market':'Choose market...',
+			'placeholder.commercialityStatus':'Choose Commerciality Status...',
+			'placeholder.country':'Choose country..',
+			'placeholder.orderCategory' : 'Choose category ...',
+			'placeholder.postOffice':'Choose post office...',
+			'placeholder.stockroom':'Select stockroom...',
+			'placeholder.tangibleItemStatus':'Select tangible item status...',
+            'day.Monday':'Monday',
+			'day.Tuesday':'Tuesday',
+			'day.Wednesday':'Wednesday',
+			'day.Thursday':'Thursday',
+			'day.Friday':'Friday',
+			'day.Saturday':'Saturday',
+			'day.Sunday':'Sunday',
+
+			// Menus and Submenus
+			{% for module in modules %}
+			'menu.{{ module.name|lower }}': '{{ module.name }}',
+				{% for entity in entities | selectattr("module", "equalto", module) %}
+			'submenu.{{ module.name|lower }}.{{ entity.name|firstlower }}': '{{ entity.name }}',
+				{% endfor %}
+			{% endfor %}
+
+            {% for view in views %}
+            // {{view.entity.name}}
+            '{{view.entity.module.label}}.{{view.entity.label}}' : '{{view.entity.name}}',
+            '{{view.entity.module.label}}.{{view.entity.label}}.edit' : 'Edit {{view.entity.name}}',
+            '{{view.entity.module.label}}.{{view.entity.label}}.choose' : 'Choose {{view.entity.name}}',
+                {% for property in view.properties %}
+            '{{view.entity.module.label}}.{{view.entity.label}}.{{property.label}}' : '{{property.label}}',
+                {% endfor %}
+                {% for relationship in view.relationships %}
+            '{{view.entity.module.label}}.{{view.entity.label}}.{{relationship.label}}' : '{{relationship.label}}',
+                {% endfor %}
+            {% endfor %}
+		}
+	};
+	return {
+		getMessage : function(id){
+			if($rootScope.langSelected === 'en') {
+				return messages.en[id];
+			}
+            else {
+				return messages.sr[id];
+			}
+		}
+	};
+}]);

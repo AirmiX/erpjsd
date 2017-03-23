@@ -1,0 +1,47 @@
+<div >
+    <form novalidate>
+        <div class="modal-header">
+            <h3 class="modal-title">{{localization.getMessage('administration.profile.edit')}}</h3>
+        </div>
+        <div class="modal-body">
+            <!--div ng-repeat="fieldModel in model.fields">
+                <div ng-edit-field field-model="fieldModel" item="itemEdit" error="errors[fieldModel.name]" ></div>
+            </div-->
+            <table> 
+                    <tr><td>{{localization.getMessage('common.identificationCode')}}</td></tr>
+                    <tr ><td><input type="text"  ng-model="cItemEdit.CRIdentificationNumber"></td><td ng-hide="cItemEdit.CRIdentificationNumber">{{localization.getMessage('common.requiredField')}}</td></tr>
+                    <tr><td>{{localization.getMessage('common.name')}}</td></tr>
+                    <tr ><td><input type="text" ng-model="cItemEdit.CRName"><td ng-hide="cItemEdit.CRName">{{localization.getMessage('common.requiredField')}}</td></td></tr>   
+                    <tr><td>{{localization.getMessage('commonBusinessEntities.characteristicsRegistry.priority')}}</td></tr>
+                    <tr ><td><input type="text" ng-model="cItemEdit.CRPriority"></td></tr>
+                    <!--tr><td>Print Priority</td></tr>
+                    <tr ><td><input type="text" ng-model="cItemEdit.CRPrintPriority"></td></tr-->                    
+                    <tr><td>{{localization.getMessage('common.status')}}</td></tr>
+                    <tr ><td><input type="checkbox" ng-model="cItemEdit.CRStatus"></td></tr>                            
+                    <tr><td>{{localization.getMessage('common.length')}}</td></tr>
+                    <tr ><td><input type="text" ng-model="cItemEdit.CRLength"></td></tr>
+                    <tr><td>{{localization.getMessage('commonBusinessEntities.characteristicsRegistry.precision')}}</td></tr>
+                    <tr ><td><input type="text" ng-disabled="cItemEdit.type.CTName == 'Text' || cItemEdit.type.CTName == 'Text '" ng-model="cItemEdit.CRPrecision"></td></tr>
+                    <tr><td>{{localization.getMessage('common.type')}}</td></tr>
+                    <tr ><td>
+                            <select ng-model="cItemEdit.type"  
+                                ng-options="itemType as itemType.CTName for itemType in itemTypes"
+                                >
+                            </select>
+                    </td><td ng-hide="cItemEdit.type">{{localization.getMessage('common.requiredField')}}</td></tr>
+            </table>
+
+            <hr/>
+            
+            
+        </div>
+        
+        
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-doob" ng-click="saveC()" ng-disabled="!cItemEdit.CRIdentificationNumber || !cItemEdit.type || !cItemEdit.CRName">{{localization.getMessage('common.save')}}</button>
+            <button class="btn btn-doob" ng-click="undoChangesC()">{{localization.getMessage('common.clear')}}</button>
+            <button class="btn btn-doob" ng-click="cancelC()">{{localization.getMessage('common.cancel')}}</button>
+        </div>
+    </form>
+    
+</div>

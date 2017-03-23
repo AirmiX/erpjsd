@@ -1,0 +1,299 @@
+<!-- Navigation -->
+<aside id="menu">
+    <div id="navigation">
+        <div class="profile-picture">
+            <div class="stats-label text-color">
+                <span class="font-extra-bold font-uppercase">{{currentUser.UUsername}}</span>
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <small class="text-muted">Profile <b class="caret"></b></small>
+                    </a>
+                    <ul class="dropdown-menu animated flipInX m-t-xs">
+                        <li><a href="#/changepassword">{{localization.getMessage('administration.users.changePassword')}}</a></li>
+                        <li><a ng-click="logout()">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="#"><span class="nav-label">Administration</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/administration/users')}"><a href="#/administration/users"> {{localization.getMessage('administration.users')}}</a></li>
+                    <li ng-class="{active: isActive('/administration/usergroups')}"><a href="#/administration/usergroups"> {{localization.getMessage('administration.userGroups')}}</a></li>
+                    <li ng-class="{active: isActive('/administration/servicegroups')}"><a href="#/administration/servicegroups"> {{localization.getMessage('administration.serviceGroups')}}</a></li>
+                    <li ng-class="{active: isActive('/administration/language')}"><a href="#/administration/language"> {{localization.getMessage('menu.language')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.commonbusinessentities')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/commonbusinessentities/classificationarchives')}" ng-if="hasServiceGroup('/commonbusinessentities/classificationarchives', 'GET')"> <a href="#/commonbusinessentities/classificationArchive"> {{localization.getMessage('submenu.commonbusinessentities.classificationArchive')}}</a></li>
+                    <li ng-class="{active: isActive('/commonbusinessentities/identifications')}" ng-if="hasServiceGroup('/commonbusinessentities/identifications', 'GET')"> <a href="#/commonbusinessentities/identification"> {{localization.getMessage('submenu.commonbusinessentities.identification')}}</a></li>
+                    <li ng-class="{active: isActive('/commonbusinessentities/characteristictypes')}" ng-if="hasServiceGroup('/commonbusinessentities/characteristictypes', 'GET')"> <a href="#/commonbusinessentities/characteristicType"> {{localization.getMessage('submenu.commonbusinessentities.characteristicType')}}</a></li>
+                    <li ng-class="{active: isActive('/commonbusinessentities/characteristicsregistrys')}" ng-if="hasServiceGroup('/commonbusinessentities/characteristicsregistrys', 'GET')"> <a href="#/commonbusinessentities/characteristicsRegistry"> {{localization.getMessage('submenu.commonbusinessentities.characteristicsRegistry')}}</a></li>
+                    <li ng-class="{active: isActive('/commonbusinessentities/characteristics')}" ng-if="hasServiceGroup('/commonbusinessentities/characteristics', 'GET')"> <a href="#/commonbusinessentities/characteristic"> {{localization.getMessage('submenu.commonbusinessentities.characteristic')}}</a></li>
+                    <li ng-class="{active: isActive('/commonbusinessentities/regulatives')}" ng-if="hasServiceGroup('/commonbusinessentities/regulatives', 'GET')"> <a href="#/commonbusinessentities/regulative"> {{localization.getMessage('submenu.commonbusinessentities.regulative')}}</a></li>
+                    <li ng-class="{active: isActive('/commonbusinessentities/classifications')}" ng-if="hasServiceGroup('/commonbusinessentities/classifications', 'GET')"> <a href="#/commonbusinessentities/classification"> {{localization.getMessage('submenu.commonbusinessentities.classification')}}</a></li>
+                    <li ng-class="{active: isActive('/commonbusinessentities/measurementunits')}" ng-if="hasServiceGroup('/commonbusinessentities/measurementunits', 'GET')"> <a href="#/commonbusinessentities/measurementUnit"> {{localization.getMessage('submenu.commonbusinessentities.measurementUnit')}}</a></li>
+                    <li ng-class="{active: isActive('/commonbusinessentities/identificationarchives')}" ng-if="hasServiceGroup('/commonbusinessentities/identificationarchives', 'GET')"> <a href="#/commonbusinessentities/identificationArchive"> {{localization.getMessage('submenu.commonbusinessentities.identificationArchive')}}</a></li>
+                    <li ng-class="{active: isActive('/commonbusinessentities/identificationhassynonimforpartners')}" ng-if="hasServiceGroup('/commonbusinessentities/identificationhassynonimforpartners', 'GET')"> <a href="#/commonbusinessentities/identificationHasSynonimForPartner"> {{localization.getMessage('submenu.commonbusinessentities.identificationHasSynonimForPartner')}}</a></li>
+                    <li ng-class="{active: isActive('/commonbusinessentities/rfpassignments')}" ng-if="hasServiceGroup('/commonbusinessentities/rfpassignments', 'GET')"> <a href="#/commonbusinessentities/rFPAssignment"> {{localization.getMessage('submenu.commonbusinessentities.rFPAssignment')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.humanresources')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/humanresources/occupations')}" ng-if="hasServiceGroup('/humanresources/occupations', 'GET')"> <a href="#/humanresources/occupation"> {{localization.getMessage('submenu.humanresources.occupation')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/workstationdemands')}" ng-if="hasServiceGroup('/humanresources/workstationdemands', 'GET')"> <a href="#/humanresources/workstationDemand"> {{localization.getMessage('submenu.humanresources.workstationDemand')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/academictitles')}" ng-if="hasServiceGroup('/humanresources/academictitles', 'GET')"> <a href="#/humanresources/academicTitle"> {{localization.getMessage('submenu.humanresources.academicTitle')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/specializations')}" ng-if="hasServiceGroup('/humanresources/specializations', 'GET')"> <a href="#/humanresources/specialization"> {{localization.getMessage('submenu.humanresources.specialization')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/schooldegrees')}" ng-if="hasServiceGroup('/humanresources/schooldegrees', 'GET')"> <a href="#/humanresources/schoolDegree"> {{localization.getMessage('submenu.humanresources.schoolDegree')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/workstationdescriptions')}" ng-if="hasServiceGroup('/humanresources/workstationdescriptions', 'GET')"> <a href="#/humanresources/workstationDescription"> {{localization.getMessage('submenu.humanresources.workstationDescription')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/nationalitys')}" ng-if="hasServiceGroup('/humanresources/nationalitys', 'GET')"> <a href="#/humanresources/nationality"> {{localization.getMessage('submenu.humanresources.nationality')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/finaldegrees')}" ng-if="hasServiceGroup('/humanresources/finaldegrees', 'GET')"> <a href="#/humanresources/finalDegree"> {{localization.getMessage('submenu.humanresources.finalDegree')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/workstations')}" ng-if="hasServiceGroup('/humanresources/workstations', 'GET')"> <a href="#/humanresources/workstation"> {{localization.getMessage('submenu.humanresources.workstation')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/occupationdemands')}" ng-if="hasServiceGroup('/humanresources/occupationdemands', 'GET')"> <a href="#/humanresources/occupationDemand"> {{localization.getMessage('submenu.humanresources.occupationDemand')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/familymembers')}" ng-if="hasServiceGroup('/humanresources/familymembers', 'GET')"> <a href="#/humanresources/familyMember"> {{localization.getMessage('submenu.humanresources.familyMember')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/jobcatalogs')}" ng-if="hasServiceGroup('/humanresources/jobcatalogs', 'GET')"> <a href="#/humanresources/jobCatalog"> {{localization.getMessage('submenu.humanresources.jobCatalog')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/occupationdescriptions')}" ng-if="hasServiceGroup('/humanresources/occupationdescriptions', 'GET')"> <a href="#/humanresources/occupationDescription"> {{localization.getMessage('submenu.humanresources.occupationDescription')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/authoritys')}" ng-if="hasServiceGroup('/humanresources/authoritys', 'GET')"> <a href="#/humanresources/authority"> {{localization.getMessage('submenu.humanresources.authority')}}</a></li>
+                    <li ng-class="{active: isActive('/humanresources/otherqualifications')}" ng-if="hasServiceGroup('/humanresources/otherqualifications', 'GET')"> <a href="#/humanresources/otherQualification"> {{localization.getMessage('submenu.humanresources.otherQualification')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.internalorder')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/internalorder/beorderheadings')}" ng-if="hasServiceGroup('/internalorder/beorderheadings', 'GET')"> <a href="#/internalorder/bEOrderHeading"> {{localization.getMessage('submenu.internalorder.bEOrderHeading')}}</a></li>
+                    <li ng-class="{active: isActive('/internalorder/beorderitems')}" ng-if="hasServiceGroup('/internalorder/beorderitems', 'GET')"> <a href="#/internalorder/bEOrderItem"> {{localization.getMessage('submenu.internalorder.bEOrderItem')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.stock')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/stock/stockrooms')}" ng-if="hasServiceGroup('/stock/stockrooms', 'GET')"> <a href="#/stock/stockroom"> {{localization.getMessage('submenu.stock.stockroom')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.corporation')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/corporation/banks')}" ng-if="hasServiceGroup('/corporation/banks', 'GET')"> <a href="#/corporation/bank"> {{localization.getMessage('submenu.corporation.bank')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/organizationunits')}" ng-if="hasServiceGroup('/corporation/organizationunits', 'GET')"> <a href="#/corporation/organizationUnit"> {{localization.getMessage('submenu.corporation.organizationUnit')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/bankaccounttypes')}" ng-if="hasServiceGroup('/corporation/bankaccounttypes', 'GET')"> <a href="#/corporation/bankAccountType"> {{localization.getMessage('submenu.corporation.bankAccountType')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/locationtypes')}" ng-if="hasServiceGroup('/corporation/locationtypes', 'GET')"> <a href="#/corporation/locationType"> {{localization.getMessage('submenu.corporation.locationType')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/locations')}" ng-if="hasServiceGroup('/corporation/locations', 'GET')"> <a href="#/corporation/location"> {{localization.getMessage('submenu.corporation.location')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/documenttypes')}" ng-if="hasServiceGroup('/corporation/documenttypes', 'GET')"> <a href="#/corporation/documentType"> {{localization.getMessage('submenu.corporation.documentType')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/accounts')}" ng-if="hasServiceGroup('/corporation/accounts', 'GET')"> <a href="#/corporation/account"> {{localization.getMessage('submenu.corporation.account')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/workcalendars')}" ng-if="hasServiceGroup('/corporation/workcalendars', 'GET')"> <a href="#/corporation/workCalendar"> {{localization.getMessage('submenu.corporation.workCalendar')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/businessentitys')}" ng-if="hasServiceGroup('/corporation/businessentitys', 'GET')"> <a href="#/corporation/businessEntity"> {{localization.getMessage('submenu.corporation.businessEntity')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/organizationschemas')}" ng-if="hasServiceGroup('/corporation/organizationschemas', 'GET')"> <a href="#/corporation/organizationSchema"> {{localization.getMessage('submenu.corporation.organizationSchema')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/employees')}" ng-if="hasServiceGroup('/corporation/employees', 'GET')"> <a href="#/corporation/employee"> {{localization.getMessage('submenu.corporation.employee')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/organizationunittypes')}" ng-if="hasServiceGroup('/corporation/organizationunittypes', 'GET')"> <a href="#/corporation/organizationUnitType"> {{localization.getMessage('submenu.corporation.organizationUnitType')}}</a></li>
+                    <li ng-class="{active: isActive('/corporation/bankaccounts')}" ng-if="hasServiceGroup('/corporation/bankaccounts', 'GET')"> <a href="#/corporation/bankAccount"> {{localization.getMessage('submenu.corporation.bankAccount')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.user')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/user/services')}" ng-if="hasServiceGroup('/user/services', 'GET')"> <a href="#/user/service"> {{localization.getMessage('submenu.user.service')}}</a></li>
+                    <li ng-class="{active: isActive('/user/languages')}" ng-if="hasServiceGroup('/user/languages', 'GET')"> <a href="#/user/language"> {{localization.getMessage('submenu.user.language')}}</a></li>
+                    <li ng-class="{active: isActive('/user/appusers')}" ng-if="hasServiceGroup('/user/appusers', 'GET')"> <a href="#/user/appUser"> {{localization.getMessage('submenu.user.appUser')}}</a></li>
+                    <li ng-class="{active: isActive('/user/usergroups')}" ng-if="hasServiceGroup('/user/usergroups', 'GET')"> <a href="#/user/userGroup"> {{localization.getMessage('submenu.user.userGroup')}}</a></li>
+                    <li ng-class="{active: isActive('/user/servicegroups')}" ng-if="hasServiceGroup('/user/servicegroups', 'GET')"> <a href="#/user/serviceGroup"> {{localization.getMessage('submenu.user.serviceGroup')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.procurement')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/procurement/proformainvoices')}" ng-if="hasServiceGroup('/procurement/proformainvoices', 'GET')"> <a href="#/procurement/proFormaInvoice"> {{localization.getMessage('submenu.procurement.proFormaInvoice')}}</a></li>
+                    <li ng-class="{active: isActive('/procurement/taxproformainvoices')}" ng-if="hasServiceGroup('/procurement/taxproformainvoices', 'GET')"> <a href="#/procurement/taxProformaInvoice"> {{localization.getMessage('submenu.procurement.taxProformaInvoice')}}</a></li>
+                    <li ng-class="{active: isActive('/procurement/invoiceitems')}" ng-if="hasServiceGroup('/procurement/invoiceitems', 'GET')"> <a href="#/procurement/invoiceItem"> {{localization.getMessage('submenu.procurement.invoiceItem')}}</a></li>
+                    <li ng-class="{active: isActive('/procurement/invoices')}" ng-if="hasServiceGroup('/procurement/invoices', 'GET')"> <a href="#/procurement/invoice"> {{localization.getMessage('submenu.procurement.invoice')}}</a></li>
+                    <li ng-class="{active: isActive('/procurement/shippingdocuments')}" ng-if="hasServiceGroup('/procurement/shippingdocuments', 'GET')"> <a href="#/procurement/shippingDocument"> {{localization.getMessage('submenu.procurement.shippingDocument')}}</a></li>
+                    <li ng-class="{active: isActive('/procurement/invoiceitemswithoutdisps')}" ng-if="hasServiceGroup('/procurement/invoiceitemswithoutdisps', 'GET')"> <a href="#/procurement/invoiceItemsWithoutDisp"> {{localization.getMessage('submenu.procurement.invoiceItemsWithoutDisp')}}</a></li>
+                    <li ng-class="{active: isActive('/procurement/shippingdocumentitems')}" ng-if="hasServiceGroup('/procurement/shippingdocumentitems', 'GET')"> <a href="#/procurement/shippingDocumentItem"> {{localization.getMessage('submenu.procurement.shippingDocumentItem')}}</a></li>
+                    <li ng-class="{active: isActive('/procurement/taxinvoices')}" ng-if="hasServiceGroup('/procurement/taxinvoices', 'GET')"> <a href="#/procurement/taxInvoice"> {{localization.getMessage('submenu.procurement.taxInvoice')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.initialization')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/initialization/discounttypes')}" ng-if="hasServiceGroup('/initialization/discounttypes', 'GET')"> <a href="#/initialization/discountType"> {{localization.getMessage('submenu.initialization.discountType')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/declarationbasiss')}" ng-if="hasServiceGroup('/initialization/declarationbasiss', 'GET')"> <a href="#/initialization/declarationBasis"> {{localization.getMessage('submenu.initialization.declarationBasis')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/procurementplanitemhasordersupplieritems')}" ng-if="hasServiceGroup('/initialization/procurementplanitemhasordersupplieritems', 'GET')"> <a href="#/initialization/procurementPlanItemHasOrderSupplierItem"> {{localization.getMessage('submenu.initialization.procurementPlanItemHasOrderSupplierItem')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/goodsacceptancestatuss')}" ng-if="hasServiceGroup('/initialization/goodsacceptancestatuss', 'GET')"> <a href="#/initialization/goodsAcceptanceStatus"> {{localization.getMessage('submenu.initialization.goodsAcceptanceStatus')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/packagingstatuss')}" ng-if="hasServiceGroup('/initialization/packagingstatuss', 'GET')"> <a href="#/initialization/packagingStatus"> {{localization.getMessage('submenu.initialization.packagingStatus')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/paymentmethods')}" ng-if="hasServiceGroup('/initialization/paymentmethods', 'GET')"> <a href="#/initialization/paymentMethod"> {{localization.getMessage('submenu.initialization.paymentMethod')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/procurementplanitems')}" ng-if="hasServiceGroup('/initialization/procurementplanitems', 'GET')"> <a href="#/initialization/procurementPlanItem"> {{localization.getMessage('submenu.initialization.procurementPlanItem')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/packingmethods')}" ng-if="hasServiceGroup('/initialization/packingmethods', 'GET')"> <a href="#/initialization/packingMethod"> {{localization.getMessage('submenu.initialization.packingMethod')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/procurementplanheadings')}" ng-if="hasServiceGroup('/initialization/procurementplanheadings', 'GET')"> <a href="#/initialization/procurementPlanHeading"> {{localization.getMessage('submenu.initialization.procurementPlanHeading')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/workorders')}" ng-if="hasServiceGroup('/initialization/workorders', 'GET')"> <a href="#/initialization/workOrder"> {{localization.getMessage('submenu.initialization.workOrder')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/commercialitystatuss')}" ng-if="hasServiceGroup('/initialization/commercialitystatuss', 'GET')"> <a href="#/initialization/commercialityStatus"> {{localization.getMessage('submenu.initialization.commercialityStatus')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/sourceattentions')}" ng-if="hasServiceGroup('/initialization/sourceattentions', 'GET')"> <a href="#/initialization/sourceAttention"> {{localization.getMessage('submenu.initialization.sourceAttention')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/tasktypes')}" ng-if="hasServiceGroup('/initialization/tasktypes', 'GET')"> <a href="#/initialization/taskType"> {{localization.getMessage('submenu.initialization.taskType')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/genders')}" ng-if="hasServiceGroup('/initialization/genders', 'GET')"> <a href="#/initialization/gender"> {{localization.getMessage('submenu.initialization.gender')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/taxheadings')}" ng-if="hasServiceGroup('/initialization/taxheadings', 'GET')"> <a href="#/initialization/taxHeading"> {{localization.getMessage('submenu.initialization.taxHeading')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/urgentstatuss')}" ng-if="hasServiceGroup('/initialization/urgentstatuss', 'GET')"> <a href="#/initialization/urgentStatus"> {{localization.getMessage('submenu.initialization.urgentStatus')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/procurementrequestheadings')}" ng-if="hasServiceGroup('/initialization/procurementrequestheadings', 'GET')"> <a href="#/initialization/procurementRequestHeading"> {{localization.getMessage('submenu.initialization.procurementRequestHeading')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/procurementrequestitems')}" ng-if="hasServiceGroup('/initialization/procurementrequestitems', 'GET')"> <a href="#/initialization/procurementRequestItem"> {{localization.getMessage('submenu.initialization.procurementRequestItem')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/taxs')}" ng-if="hasServiceGroup('/initialization/taxs', 'GET')"> <a href="#/initialization/tax"> {{localization.getMessage('submenu.initialization.tax')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/workorderhasproductionrequestss')}" ng-if="hasServiceGroup('/initialization/workorderhasproductionrequestss', 'GET')"> <a href="#/initialization/workOrderHasProductionRequests"> {{localization.getMessage('submenu.initialization.workOrderHasProductionRequests')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/denotationmethods')}" ng-if="hasServiceGroup('/initialization/denotationmethods', 'GET')"> <a href="#/initialization/denotationMethod"> {{localization.getMessage('submenu.initialization.denotationMethod')}}</a></li>
+                    <li ng-class="{active: isActive('/initialization/paymentconditions')}" ng-if="hasServiceGroup('/initialization/paymentconditions', 'GET')"> <a href="#/initialization/paymentCondition"> {{localization.getMessage('submenu.initialization.paymentCondition')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.productionrequest')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/productionrequest/requestforproductionitems')}" ng-if="hasServiceGroup('/productionrequest/requestforproductionitems', 'GET')"> <a href="#/productionrequest/requestForProductionItem"> {{localization.getMessage('submenu.productionrequest.requestForProductionItem')}}</a></li>
+                    <li ng-class="{active: isActive('/productionrequest/requestforproductions')}" ng-if="hasServiceGroup('/productionrequest/requestforproductions', 'GET')"> <a href="#/productionrequest/requestForProduction"> {{localization.getMessage('submenu.productionrequest.requestForProduction')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.sellingprice')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/sellingprice/markets')}" ng-if="hasServiceGroup('/sellingprice/markets', 'GET')"> <a href="#/sellingprice/market"> {{localization.getMessage('submenu.sellingprice.market')}}</a></li>
+                    <li ng-class="{active: isActive('/sellingprice/oubelongings')}" ng-if="hasServiceGroup('/sellingprice/oubelongings', 'GET')"> <a href="#/sellingprice/oUBelonging"> {{localization.getMessage('submenu.sellingprice.oUBelonging')}}</a></li>
+                    <li ng-class="{active: isActive('/sellingprice/sellingprices')}" ng-if="hasServiceGroup('/sellingprice/sellingprices', 'GET')"> <a href="#/sellingprice/sellingPrice"> {{localization.getMessage('submenu.sellingprice.sellingPrice')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.productiondata')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/productiondata/productionprocesss')}" ng-if="hasServiceGroup('/productiondata/productionprocesss', 'GET')"> <a href="#/productiondata/productionProcess"> {{localization.getMessage('submenu.productiondata.productionProcess')}}</a></li>
+                    <li ng-class="{active: isActive('/productiondata/stepusermanuals')}" ng-if="hasServiceGroup('/productiondata/stepusermanuals', 'GET')"> <a href="#/productiondata/stepUserManual"> {{localization.getMessage('submenu.productiondata.stepUserManual')}}</a></li>
+                    <li ng-class="{active: isActive('/productiondata/steptimeanalysiss')}" ng-if="hasServiceGroup('/productiondata/steptimeanalysiss', 'GET')"> <a href="#/productiondata/stepTimeAnalysis"> {{localization.getMessage('submenu.productiondata.stepTimeAnalysis')}}</a></li>
+                    <li ng-class="{active: isActive('/productiondata/products')}" ng-if="hasServiceGroup('/productiondata/products', 'GET')"> <a href="#/productiondata/product"> {{localization.getMessage('submenu.productiondata.product')}}</a></li>
+                    <li ng-class="{active: isActive('/productiondata/stepsclassifications')}" ng-if="hasServiceGroup('/productiondata/stepsclassifications', 'GET')"> <a href="#/productiondata/stepsClassification"> {{localization.getMessage('submenu.productiondata.stepsClassification')}}</a></li>
+                    <li ng-class="{active: isActive('/productiondata/productionprocesstypes')}" ng-if="hasServiceGroup('/productiondata/productionprocesstypes', 'GET')"> <a href="#/productiondata/productionProcessType"> {{localization.getMessage('submenu.productiondata.productionProcessType')}}</a></li>
+                    <li ng-class="{active: isActive('/productiondata/consumablesuppliess')}" ng-if="hasServiceGroup('/productiondata/consumablesuppliess', 'GET')"> <a href="#/productiondata/consumableSupplies"> {{localization.getMessage('submenu.productiondata.consumableSupplies')}}</a></li>
+                    <li ng-class="{active: isActive('/productiondata/productionprocessstepss')}" ng-if="hasServiceGroup('/productiondata/productionprocessstepss', 'GET')"> <a href="#/productiondata/productionProcessSteps"> {{localization.getMessage('submenu.productiondata.productionProcessSteps')}}</a></li>
+                    <li ng-class="{active: isActive('/productiondata/steptools')}" ng-if="hasServiceGroup('/productiondata/steptools', 'GET')"> <a href="#/productiondata/stepTool"> {{localization.getMessage('submenu.productiondata.stepTool')}}</a></li>
+                    <li ng-class="{active: isActive('/productiondata/controldemandss')}" ng-if="hasServiceGroup('/productiondata/controldemandss', 'GET')"> <a href="#/productiondata/controlDemands"> {{localization.getMessage('submenu.productiondata.controlDemands')}}</a></li>
+                    <li ng-class="{active: isActive('/productiondata/workcenters')}" ng-if="hasServiceGroup('/productiondata/workcenters', 'GET')"> <a href="#/productiondata/workCenter"> {{localization.getMessage('submenu.productiondata.workCenter')}}</a></li>
+                    <li ng-class="{active: isActive('/productiondata/structuralcomponentss')}" ng-if="hasServiceGroup('/productiondata/structuralcomponentss', 'GET')"> <a href="#/productiondata/structuralComponents"> {{localization.getMessage('submenu.productiondata.structuralComponents')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.stockmanagement')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/stockmanagement/goodsreceivednoteheadings')}" ng-if="hasServiceGroup('/stockmanagement/goodsreceivednoteheadings', 'GET')"> <a href="#/stockmanagement/goodsReceivedNoteHeading"> {{localization.getMessage('submenu.stockmanagement.goodsReceivedNoteHeading')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/tangibleitemammountbylots')}" ng-if="hasServiceGroup('/stockmanagement/tangibleitemammountbylots', 'GET')"> <a href="#/stockmanagement/tangibleItemAmmountByLot"> {{localization.getMessage('submenu.stockmanagement.tangibleItemAmmountByLot')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/requisitionitems')}" ng-if="hasServiceGroup('/stockmanagement/requisitionitems', 'GET')"> <a href="#/stockmanagement/requisitionItem"> {{localization.getMessage('submenu.stockmanagement.requisitionItem')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/requestforproposalheadings')}" ng-if="hasServiceGroup('/stockmanagement/requestforproposalheadings', 'GET')"> <a href="#/stockmanagement/requestForProposalHeading"> {{localization.getMessage('submenu.stockmanagement.requestForProposalHeading')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/expensesaccountassignments')}" ng-if="hasServiceGroup('/stockmanagement/expensesaccountassignments', 'GET')"> <a href="#/stockmanagement/expensesAccountAssignment"> {{localization.getMessage('submenu.stockmanagement.expensesAccountAssignment')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/transactionlogs')}" ng-if="hasServiceGroup('/stockmanagement/transactionlogs', 'GET')"> <a href="#/stockmanagement/transactionLog"> {{localization.getMessage('submenu.stockmanagement.transactionLog')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/items')}" ng-if="hasServiceGroup('/stockmanagement/items', 'GET')"> <a href="#/stockmanagement/item"> {{localization.getMessage('submenu.stockmanagement.item')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/materialreturnnotes')}" ng-if="hasServiceGroup('/stockmanagement/materialreturnnotes', 'GET')"> <a href="#/stockmanagement/materialReturnNote"> {{localization.getMessage('submenu.stockmanagement.materialReturnNote')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/pricearchives')}" ng-if="hasServiceGroup('/stockmanagement/pricearchives', 'GET')"> <a href="#/stockmanagement/priceArchive"> {{localization.getMessage('submenu.stockmanagement.priceArchive')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/pricedesignations')}" ng-if="hasServiceGroup('/stockmanagement/pricedesignations', 'GET')"> <a href="#/stockmanagement/priceDesignation"> {{localization.getMessage('submenu.stockmanagement.priceDesignation')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/tangibleitemammountbyaddresss')}" ng-if="hasServiceGroup('/stockmanagement/tangibleitemammountbyaddresss', 'GET')"> <a href="#/stockmanagement/tangibleItemAmmountByAddress"> {{localization.getMessage('submenu.stockmanagement.tangibleItemAmmountByAddress')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/deliverynoteitems')}" ng-if="hasServiceGroup('/stockmanagement/deliverynoteitems', 'GET')"> <a href="#/stockmanagement/deliveryNoteItem"> {{localization.getMessage('submenu.stockmanagement.deliveryNoteItem')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/deliverynotes')}" ng-if="hasServiceGroup('/stockmanagement/deliverynotes', 'GET')"> <a href="#/stockmanagement/deliveryNote"> {{localization.getMessage('submenu.stockmanagement.deliveryNote')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/productionrequests')}" ng-if="hasServiceGroup('/stockmanagement/productionrequests', 'GET')"> <a href="#/stockmanagement/productionRequest"> {{localization.getMessage('submenu.stockmanagement.productionRequest')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/tangibleitemanalyticss')}" ng-if="hasServiceGroup('/stockmanagement/tangibleitemanalyticss', 'GET')"> <a href="#/stockmanagement/tangibleItemAnalytics"> {{localization.getMessage('submenu.stockmanagement.tangibleItemAnalytics')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/revokedprocurementrequests')}" ng-if="hasServiceGroup('/stockmanagement/revokedprocurementrequests', 'GET')"> <a href="#/stockmanagement/revokedProcurementRequest"> {{localization.getMessage('submenu.stockmanagement.revokedProcurementRequest')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/transferorders')}" ng-if="hasServiceGroup('/stockmanagement/transferorders', 'GET')"> <a href="#/stockmanagement/transferOrder"> {{localization.getMessage('submenu.stockmanagement.transferOrder')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/stockroomorgunis')}" ng-if="hasServiceGroup('/stockmanagement/stockroomorgunis', 'GET')"> <a href="#/stockmanagement/stockroomOrgUni"> {{localization.getMessage('submenu.stockmanagement.stockroomOrgUni')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/tangibleitemstatuss')}" ng-if="hasServiceGroup('/stockmanagement/tangibleitemstatuss', 'GET')"> <a href="#/stockmanagement/tangibleItemStatus"> {{localization.getMessage('submenu.stockmanagement.tangibleItemStatus')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/spoilagecauses')}" ng-if="hasServiceGroup('/stockmanagement/spoilagecauses', 'GET')"> <a href="#/stockmanagement/spoilageCause"> {{localization.getMessage('submenu.stockmanagement.spoilageCause')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/goodsreceivednoteitems')}" ng-if="hasServiceGroup('/stockmanagement/goodsreceivednoteitems', 'GET')"> <a href="#/stockmanagement/goodsReceivedNoteItem"> {{localization.getMessage('submenu.stockmanagement.goodsReceivedNoteItem')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/tangibleitemconditions')}" ng-if="hasServiceGroup('/stockmanagement/tangibleitemconditions', 'GET')"> <a href="#/stockmanagement/tangibleItemCondition"> {{localization.getMessage('submenu.stockmanagement.tangibleItemCondition')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/requisitions')}" ng-if="hasServiceGroup('/stockmanagement/requisitions', 'GET')"> <a href="#/stockmanagement/requisition"> {{localization.getMessage('submenu.stockmanagement.requisition')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/packings')}" ng-if="hasServiceGroup('/stockmanagement/packings', 'GET')"> <a href="#/stockmanagement/packing"> {{localization.getMessage('submenu.stockmanagement.packing')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/tangibleitemammounttools')}" ng-if="hasServiceGroup('/stockmanagement/tangibleitemammounttools', 'GET')"> <a href="#/stockmanagement/tangibleItemAmmountTool"> {{localization.getMessage('submenu.stockmanagement.tangibleItemAmmountTool')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/rfpitemprocurementplanitems')}" ng-if="hasServiceGroup('/stockmanagement/rfpitemprocurementplanitems', 'GET')"> <a href="#/stockmanagement/rFPItemProcurementPlanItem"> {{localization.getMessage('submenu.stockmanagement.rFPItemProcurementPlanItem')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/stockaccountassignments')}" ng-if="hasServiceGroup('/stockmanagement/stockaccountassignments', 'GET')"> <a href="#/stockmanagement/stockAccountAssignment"> {{localization.getMessage('submenu.stockmanagement.stockAccountAssignment')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/productstatuss')}" ng-if="hasServiceGroup('/stockmanagement/productstatuss', 'GET')"> <a href="#/stockmanagement/productStatus"> {{localization.getMessage('submenu.stockmanagement.productStatus')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/materialreturnnoteitems')}" ng-if="hasServiceGroup('/stockmanagement/materialreturnnoteitems', 'GET')"> <a href="#/stockmanagement/materialReturnNoteItem"> {{localization.getMessage('submenu.stockmanagement.materialReturnNoteItem')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/requestforproposalitems')}" ng-if="hasServiceGroup('/stockmanagement/requestforproposalitems', 'GET')"> <a href="#/stockmanagement/requestForProposalItem"> {{localization.getMessage('submenu.stockmanagement.requestForProposalItem')}}</a></li>
+                    <li ng-class="{active: isActive('/stockmanagement/prices')}" ng-if="hasServiceGroup('/stockmanagement/prices', 'GET')"> <a href="#/stockmanagement/price"> {{localization.getMessage('submenu.stockmanagement.price')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.logical')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/logical/ordersupplierheadings')}" ng-if="hasServiceGroup('/logical/ordersupplierheadings', 'GET')"> <a href="#/logical/orderSupplierHeading"> {{localization.getMessage('submenu.logical.orderSupplierHeading')}}</a></li>
+                    <li ng-class="{active: isActive('/logical/ordersupplieritems')}" ng-if="hasServiceGroup('/logical/ordersupplieritems', 'GET')"> <a href="#/logical/orderSupplierItem"> {{localization.getMessage('submenu.logical.orderSupplierItem')}}</a></li>
+                    <li ng-class="{active: isActive('/logical/paritys')}" ng-if="hasServiceGroup('/logical/paritys', 'GET')"> <a href="#/logical/parity"> {{localization.getMessage('submenu.logical.parity')}}</a></li>
+                    <li ng-class="{active: isActive('/logical/offersupplieritems')}" ng-if="hasServiceGroup('/logical/offersupplieritems', 'GET')"> <a href="#/logical/offerSupplierItem"> {{localization.getMessage('submenu.logical.offerSupplierItem')}}</a></li>
+                    <li ng-class="{active: isActive('/logical/offersupplierheadings')}" ng-if="hasServiceGroup('/logical/offersupplierheadings', 'GET')"> <a href="#/logical/offerSupplierHeading"> {{localization.getMessage('submenu.logical.offerSupplierHeading')}}</a></li>
+                    <li ng-class="{active: isActive('/logical/transferorderitems')}" ng-if="hasServiceGroup('/logical/transferorderitems', 'GET')"> <a href="#/logical/transferOrderItem"> {{localization.getMessage('submenu.logical.transferOrderItem')}}</a></li>
+                    <li ng-class="{active: isActive('/logical/procurementrequestsettlements')}" ng-if="hasServiceGroup('/logical/procurementrequestsettlements', 'GET')"> <a href="#/logical/procurementRequestSettlement"> {{localization.getMessage('submenu.logical.procurementRequestSettlement')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.procurementplan')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/procurementplan/planningperiods')}" ng-if="hasServiceGroup('/procurementplan/planningperiods', 'GET')"> <a href="#/procurementplan/planningPeriod"> {{localization.getMessage('submenu.procurementplan.planningPeriod')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.order')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/order/customers')}" ng-if="hasServiceGroup('/order/customers', 'GET')"> <a href="#/order/customer"> {{localization.getMessage('submenu.order.customer')}}</a></li>
+                    <li ng-class="{active: isActive('/order/ordergroups')}" ng-if="hasServiceGroup('/order/ordergroups', 'GET')"> <a href="#/order/orderGroup"> {{localization.getMessage('submenu.order.orderGroup')}}</a></li>
+                    <li ng-class="{active: isActive('/order/deliverymethods')}" ng-if="hasServiceGroup('/order/deliverymethods', 'GET')"> <a href="#/order/deliveryMethod"> {{localization.getMessage('submenu.order.deliveryMethod')}}</a></li>
+                    <li ng-class="{active: isActive('/order/ordercategorys')}" ng-if="hasServiceGroup('/order/ordercategorys', 'GET')"> <a href="#/order/orderCategory"> {{localization.getMessage('submenu.order.orderCategory')}}</a></li>
+                    <li ng-class="{active: isActive('/order/orderitems')}" ng-if="hasServiceGroup('/order/orderitems', 'GET')"> <a href="#/order/orderItem"> {{localization.getMessage('submenu.order.orderItem')}}</a></li>
+                    <li ng-class="{active: isActive('/order/productinstances')}" ng-if="hasServiceGroup('/order/productinstances', 'GET')"> <a href="#/order/productInstance"> {{localization.getMessage('submenu.order.productInstance')}}</a></li>
+                    <li ng-class="{active: isActive('/order/specialprojects')}" ng-if="hasServiceGroup('/order/specialprojects', 'GET')"> <a href="#/order/specialProject"> {{localization.getMessage('submenu.order.specialProject')}}</a></li>
+                    <li ng-class="{active: isActive('/order/companys')}" ng-if="hasServiceGroup('/order/companys', 'GET')"> <a href="#/order/company"> {{localization.getMessage('submenu.order.company')}}</a></li>
+                    <li ng-class="{active: isActive('/order/orderheadings')}" ng-if="hasServiceGroup('/order/orderheadings', 'GET')"> <a href="#/order/orderHeading"> {{localization.getMessage('submenu.order.orderHeading')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.renaming')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/renaming/renamings')}" ng-if="hasServiceGroup('/renaming/renamings', 'GET')"> <a href="#/renaming/renaming"> {{localization.getMessage('submenu.renaming.renaming')}}</a></li>
+                    <li ng-class="{active: isActive('/renaming/renamingitems')}" ng-if="hasServiceGroup('/renaming/renamingitems', 'GET')"> <a href="#/renaming/renamingItem"> {{localization.getMessage('submenu.renaming.renamingItem')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.customerrequest')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/customerrequest/customerrequestheadings')}" ng-if="hasServiceGroup('/customerrequest/customerrequestheadings', 'GET')"> <a href="#/customerrequest/customerRequestHeading"> {{localization.getMessage('submenu.customerrequest.customerRequestHeading')}}</a></li>
+                    <li ng-class="{active: isActive('/customerrequest/customerrequestitems')}" ng-if="hasServiceGroup('/customerrequest/customerrequestitems', 'GET')"> <a href="#/customerrequest/customerRequestItem"> {{localization.getMessage('submenu.customerrequest.customerRequestItem')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.capacitymanagement')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/capacitymanagement/alternativeworkcenterstepss')}" ng-if="hasServiceGroup('/capacitymanagement/alternativeworkcenterstepss', 'GET')"> <a href="#/capacitymanagement/alternativeWorkCenterSteps"> {{localization.getMessage('submenu.capacitymanagement.alternativeWorkCenterSteps')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/workons')}" ng-if="hasServiceGroup('/capacitymanagement/workons', 'GET')"> <a href="#/capacitymanagement/workOn"> {{localization.getMessage('submenu.capacitymanagement.workOn')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/rates')}" ng-if="hasServiceGroup('/capacitymanagement/rates', 'GET')"> <a href="#/capacitymanagement/rate"> {{localization.getMessage('submenu.capacitymanagement.rate')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/technologicalunits')}" ng-if="hasServiceGroup('/capacitymanagement/technologicalunits', 'GET')"> <a href="#/capacitymanagement/technologicalUnit"> {{localization.getMessage('submenu.capacitymanagement.technologicalUnit')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/workcenterstepss')}" ng-if="hasServiceGroup('/capacitymanagement/workcenterstepss', 'GET')"> <a href="#/capacitymanagement/workCenterSteps"> {{localization.getMessage('submenu.capacitymanagement.workCenterSteps')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/countrycurrencys')}" ng-if="hasServiceGroup('/capacitymanagement/countrycurrencys', 'GET')"> <a href="#/capacitymanagement/countryCurrency"> {{localization.getMessage('submenu.capacitymanagement.countryCurrency')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/technicalcharacteristicproductionequipments')}" ng-if="hasServiceGroup('/capacitymanagement/technicalcharacteristicproductionequipments', 'GET')"> <a href="#/capacitymanagement/technicalCharacteristicProductionEquipment"> {{localization.getMessage('submenu.capacitymanagement.technicalCharacteristicProductionEquipment')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/alternativeworkcenters')}" ng-if="hasServiceGroup('/capacitymanagement/alternativeworkcenters', 'GET')"> <a href="#/capacitymanagement/alternativeWorkCenter"> {{localization.getMessage('submenu.capacitymanagement.alternativeWorkCenter')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/balanceresources')}" ng-if="hasServiceGroup('/capacitymanagement/balanceresources', 'GET')"> <a href="#/capacitymanagement/balanceResource"> {{localization.getMessage('submenu.capacitymanagement.balanceResource')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/currencys')}" ng-if="hasServiceGroup('/capacitymanagement/currencys', 'GET')"> <a href="#/capacitymanagement/currency"> {{localization.getMessage('submenu.capacitymanagement.currency')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/availabilityworkcenters')}" ng-if="hasServiceGroup('/capacitymanagement/availabilityworkcenters', 'GET')"> <a href="#/capacitymanagement/availabilityWorkCenter"> {{localization.getMessage('submenu.capacitymanagement.availabilityWorkCenter')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/assets')}" ng-if="hasServiceGroup('/capacitymanagement/assets', 'GET')"> <a href="#/capacitymanagement/asset"> {{localization.getMessage('submenu.capacitymanagement.asset')}}</a></li>
+                    <li ng-class="{active: isActive('/capacitymanagement/availabilitytechnologicalunitss')}" ng-if="hasServiceGroup('/capacitymanagement/availabilitytechnologicalunitss', 'GET')"> <a href="#/capacitymanagement/availabilityTechnologicalUnits"> {{localization.getMessage('submenu.capacitymanagement.availabilityTechnologicalUnits')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.environment')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/environment/postoffices')}" ng-if="hasServiceGroup('/environment/postoffices', 'GET')"> <a href="#/environment/postOffice"> {{localization.getMessage('submenu.environment.postOffice')}}</a></li>
+                    <li ng-class="{active: isActive('/environment/mvcountrys')}" ng-if="hasServiceGroup('/environment/mvcountrys', 'GET')"> <a href="#/environment/mVCountry"> {{localization.getMessage('submenu.environment.mVCountry')}}</a></li>
+                    <li ng-class="{active: isActive('/environment/addresss')}" ng-if="hasServiceGroup('/environment/addresss', 'GET')"> <a href="#/environment/address"> {{localization.getMessage('submenu.environment.address')}}</a></li>
+                    <li ng-class="{active: isActive('/environment/mvcitys')}" ng-if="hasServiceGroup('/environment/mvcitys', 'GET')"> <a href="#/environment/mVCity"> {{localization.getMessage('submenu.environment.mVCity')}}</a></li>
+                    <li ng-class="{active: isActive('/environment/territorialunits')}" ng-if="hasServiceGroup('/environment/territorialunits', 'GET')"> <a href="#/environment/territorialUnit"> {{localization.getMessage('submenu.environment.territorialUnit')}}</a></li>
+                    <li ng-class="{active: isActive('/environment/mvstates')}" ng-if="hasServiceGroup('/environment/mvstates', 'GET')"> <a href="#/environment/mVState"> {{localization.getMessage('submenu.environment.mVState')}}</a></li>
+                    <li ng-class="{active: isActive('/environment/territorialunittypes')}" ng-if="hasServiceGroup('/environment/territorialunittypes', 'GET')"> <a href="#/environment/territorialUnitType"> {{localization.getMessage('submenu.environment.territorialUnitType')}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="nav-label">{{localization.getMessage('menu.internalinvoice')}}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/internalinvoice/betaxinvoices')}" ng-if="hasServiceGroup('/internalinvoice/betaxinvoices', 'GET')"> <a href="#/internalinvoice/bETaxInvoice"> {{localization.getMessage('submenu.internalinvoice.bETaxInvoice')}}</a></li>
+                    <li ng-class="{active: isActive('/internalinvoice/beinvoices')}" ng-if="hasServiceGroup('/internalinvoice/beinvoices', 'GET')"> <a href="#/internalinvoice/bEInvoice"> {{localization.getMessage('submenu.internalinvoice.bEInvoice')}}</a></li>
+                    <li ng-class="{active: isActive('/internalinvoice/beinvoiceitems')}" ng-if="hasServiceGroup('/internalinvoice/beinvoiceitems', 'GET')"> <a href="#/internalinvoice/bEInvoiceItem"> {{localization.getMessage('submenu.internalinvoice.bEInvoiceItem')}}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</aside>

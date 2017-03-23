@@ -1,0 +1,737 @@
+	<script>
+	$('.tree-toggle').click(function () {
+		$(this).parent().children('ul.tree').toggle(200);
+	});
+	</script>
+	<style>
+	.panel li {
+	  color:#ededed;
+	  font-family: Exo-Medium;
+	}
+
+	.panel a {
+		padding-left: 25px
+	}
+
+	.panel-scroll {
+	    	max-height: 80vh;
+		overflow: hidden;
+		overflow-y: auto;
+	  }
+
+	.panel li:hover {
+	 text-decoration:none;
+	 color:#8cc8e6;
+	 cursor: pointer;
+	}
+
+	.panel .table td {
+	 border-color: #f3f3f3;
+	}
+	</style>
+	<div class="col-md-2" >
+		<!--div class="container"-->
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="panel panel-group" id="main">
+						<ul class="panel-body nav">
+							<div class="panel-heading">  
+								<h4 class="panel-title">
+									<li class="tree-toggle" data-toggle="collapse" data-parent="#main" href="#accordion"><span class="glyphicon glyphicon-folder-close"></span> ERP Modules</li>
+								</h4>  
+							</div>
+							<ul class="panel-collapse collapse panel-scroll nav" id="accordion" >
+								<div class="panel-default" >
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<li data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close"></span> {{localization.getMessage('submenu.environment')}}</li>
+										</h4>
+									</div>
+									<ul id="collapseOne" class="panel-collapse collapse nav">
+										<div class="panel-body">
+											<table class="table">
+												<tbody><tr>
+												<td ng-if="hasServiceGroup('/environment/postOffice', 'GET')">
+														<li> <a href="#/environment/post"> {{localization.getMessage('submenu.environment.post')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/environment/territorial_unit">{{localization.getMessage('submenu.environment.teritorialUnit')}} </a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/environment/territorial_unit_type">{{localization.getMessage('submenu.environment.teritorialUnitType')}}</a></li>
+													</td>
+												</tr>
+											</tbody></table>
+										</div>
+									</ul>
+								</div>
+								<div class="panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<li data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-folder-close"></span> {{localization.getMessage('submenu.corporation')}}</li>
+										</h4>
+									</div>
+									<ul id="collapseTwo" class="panel-collapse collapse nav">
+										<div class="panel-body">
+											<table class="table">
+												<tbody>
+												<tr>
+													<td>
+														<li><a href="#/corporation/location_type">{{localization.getMessage('submenu.corporation.locationTypes')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/corporation/location">{{localization.getMessage('submenu.corporation.location')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/corporation/organization_unit_type">{{localization.getMessage('submenu.corporation.organizationUnitType')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/corporation/organization_unit">{{localization.getMessage('submenu.corporation.organizationUnits')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/corporation/work_calendar">{{localization.getMessage('submenu.corporation.workCalendar')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/corporation/employee/general">{{localization.getMessage('submenu.corporation.employee')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/corporation/document_type">{{localization.getMessage('submenu.corporation.documentType')}}</a></li>
+													</td>
+												</tr>											
+												<tr>
+													<td>
+														<li><a href="#/corporation/business_entity">{{localization.getMessage('submenu.corporation.businessEntity')}}</a></li>
+													</td>
+												</tr>
+												<!--tr>
+													<td>
+														<li><a href="#/corporation/account">{{localization.getMessage('submenu.corporation.account')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/corporation/bank_account">{{localization.getMessage('submenu.corporation.bankAccount')}}</a></li>
+													</td>
+												</tr-->
+												<tr>
+													<td>
+														<li><a href="#/corporation/bank">{{localization.getMessage('submenu.corporation.bank')}}</a></li>
+													</td>
+												</tr>
+											</tbody></table>
+										</div>
+									</ul>
+								</div>
+								<div class="panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<li data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-folder-close"></span> {{localization.getMessage('submenu.commonBusinessEntities')}}</a></li>
+										</h4>
+									</div>
+									<ul id="collapseThree" class="panel-collapse collapse nav">
+										<div class="panel-body">
+											<table class="table">
+												<tbody><tr>
+													<td>
+														<li><a href="#/commonbusinessentities/classifications"> {{localization.getMessage('submenu.commonBusinessEntities.classification')}}</a></li>
+													</td>
+												</tr>
+												<!--tr>
+													<td>
+														<li href="#"><span class="glyphicon glyphicon-flash text-success"></span> Classification archive</li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/commonbusinessentities/characteristicsRegistrys"><span class="glyphicon glyphicon-file text-info"></span> Characteristics registry</a></li>
+													</td>
+												</tr-->
+												<tr>
+													<td>
+														<li><a href="#/commonbusinessentities/characteristicTypes"> {{localization.getMessage('submenu.commonBusinessEntities.characteristicType')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/commonbusinessentities/measurementUnits"> {{localization.getMessage('submenu.commonBusinessEntities.measurementUnit')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/commonbusinessentities/regulatives"> {{localization.getMessage('submenu.commonBusinessEntities.regulative')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/commonbusinessentities/identifications"> {{localization.getMessage('submenu.commonBusinessEntities.identification')}}</a></li>
+													</td>
+												</tr>
+												<!--tr>
+													<td>
+														<li href="#"><span class="glyphicon glyphicon-file text-info"></span> Identification archive</li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/commonbusinessentities/characteristics"><span class="glyphicon glyphicon-file text-info"></span> Characteristic</a></li>
+													</td>
+												</tr-->
+											</tbody></table>
+										</div>
+									</ul>
+								</div>
+								<div class="panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<li data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-folder-close"></span> {{localization.getMessage('submenu.humanResources')}}</a></li>
+										</h4>
+									</div>
+									<ul id="collapseFour" class="panel-collapse collapse nav">
+										<div class="panel-body">
+											<table class="table">
+												<tbody><!--tr>
+													<td>
+														<li><a href="#/humanresources/absence"> Absence</a></li>
+													</td>
+												</tr-->
+												<tr>
+													<td>
+														<li><a href="#/humanresources/employee/detail">{{localization.getMessage('submenu.corporation.employee')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/academic_title"> {{localization.getMessage('submenu.humanResources.academicTitle')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/other_qualification"> {{localization.getMessage('submenu.humanResources.otherQualification')}}</a></li>
+													</td>
+												</tr>
+												<!--tr>
+													<td>
+														<li><a href="#/humanresources/acceptance"> Acceptance</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/act_content"> Act content</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/act_item"> Act item</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/act_type"> Act type</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/authority"> Authority</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/case"> Case</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/case_type"> Case type</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/decision"> Decision</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/decision_template"> Decision template</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/disposition"> Disposition</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/external_document"> External document</a></li>
+													</td>
+												</tr-->
+												<!--tr>
+													<td>
+														<li><a href="#/humanresources/family_member"> Family member</a></li>
+													</td>
+												</tr-->
+												<tr>
+													<td>
+														<li><a href="#/humanresources/final_degree"> {{localization.getMessage('submenu.humanResources.finalDegree')}}</a></li>
+													</td>
+												</tr>
+												<!--tr>
+													<td>
+														<li><a href="#/humanresources/holiday"> Holiday</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/holiday_day"> Holiday day</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/holiday_reason"> Holiday reason</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/internal_document"> Internal document</a></li>
+													</td>
+												</tr-->
+												<tr>
+													<td>
+														<li><a href="#/humanresources/job_catalog"> {{localization.getMessage('submenu.humanResources.jobCatalog')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/nationality"> {{localization.getMessage('submenu.humanResources.nationality')}}</a></li>
+													</td>
+												</tr>
+												<!--tr>
+													<td>
+														<li><a href="#/humanresources/normativ_act"> Normativ act</a></li>
+													</td>
+												</tr-->
+												<tr>
+													<td>
+														<li><a href="#/humanresources/occupation"> {{localization.getMessage('submenu.humanResources.occupations')}}</a></li>
+													</td>
+												</tr>
+
+												<!-- <tr>
+
+
+													<td>
+														<li><a href="#/humanresources/occupation_demand"> Occupation demand</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/occupation_description"> Occupation description</a></li>
+													</td>
+
+												</tr> -->
+
+												<!--tr>
+													<td>
+														<li><a href="#/humanresources/penalty"> Penalty</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/prize"> Prize</a></li>
+													</td>
+												</tr-->
+												<tr>
+													<td>
+														<li><a href="#/humanresources/school_degree"> {{localization.getMessage('submenu.humanResources.schoolDegree')}}</a></li>
+													</td>
+												</tr>
+												<!--tr>
+													<td>
+														<li><a href="#/humanresources/sending"> Sending</a></li>
+													</td>
+												</tr-->
+												<tr>
+													<td>
+														<li><a href="#/humanresources/specialization"> {{localization.getMessage('submenu.humanResources.specialization')}}</a></li>
+													</td>
+												</tr>
+												<!--tr>
+													<td>
+														<li><a href="#/humanresources/step"> Step</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/suspension"> Suspension</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/template_row"> Template row</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/termination"> Termination</a></li>
+													</td>
+												</tr-->
+												<tr>
+													<td>
+														<li><a href="#/humanresources/workstation"> {{localization.getMessage('submenu.humanResources.workstation')}}</a></li>
+													</td>
+												</tr>
+												<!--tr>
+													<td>
+														<li><a href="#/humanresources/workstation_demand"> Workstation Demand</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/humanresources/workstation_description"> Workstation Description</a></li>
+													</td>
+												</tr-->
+											</tbody></table>
+										</div>
+									</ul>
+								</div>
+								<div class="panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<li data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-folder-close"></span> {{localization.getMessage('submenu.productionData')}}</a></li>
+										</h4>
+									</div>
+									<ul id="collapseFive" class="panel-collapse collapse nav">
+										<div class="panel-body">
+											<table class="table">
+												<tbody>
+												<tr>
+													<td>
+														<li><a href="#/productiondata/structural_components"> {{localization.getMessage('submenu.productionData.structuralComponents')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/productiondata/production_process"> {{localization.getMessage('submenu.productionData.productionProcess')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/productiondata/production_process_type"> {{localization.getMessage('submenu.productionData.productionProcessTypes')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/productiondata/steps_classification">{{localization.getMessage('submenu.productionData.stepClassification')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/productiondata/work_center"> {{localization.getMessage('submenu.productionData.workCenters')}}</a></li>
+													</td>
+												</tr>
+											</tbody></table>
+										</div>
+									</ul>
+								</div>
+								<div class="panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<li data-toggle="collapse" data-parent="#accordion" href="#collapseSix"><span class="glyphicon glyphicon-folder-close"></span> {{localization.getMessage('submenu.capacityManagement')}}</a></li>
+										</h4>
+									</div>
+									<ul id="collapseSix" class="panel-collapse collapse nav">
+										<div class="panel-body">
+											<table class="table">
+												<tbody>
+												<tr>
+													<td>
+														<li><a href="#/capacitymanagement/balance_resource"> {{localization.getMessage('submenu.capacityManagement.balanceResource')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/capacitymanagement/currency"> {{localization.getMessage('common.currency')}}</a></li>
+													</td>
+												</tr>
+											</tbody></table>
+										</div>
+									</ul>
+								</div>
+	                            <div class="panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<li data-toggle="collapse" data-parent="#accordion" href="#collapseSeven"><span class="glyphicon glyphicon-folder-close"></span> Administration</a></li>
+										</h4>
+									</div>
+									<!--ul id="collapseSeven" class="panel-collapse collapse nav">
+										<div class="panel-body">
+											<table class="table">
+												<tbody>
+												<tr>
+													<td>
+														<li><a href="#/administration/mappingTable"> Characteristic</a></li>
+													</td>
+												</tr>
+											</tbody></table>
+										</div>
+									</ul-->
+									<ul id="collapseSeven" class="panel-collapse collapse nav">
+										<div class="panel-body">
+											<table class="table">
+												<tbody>
+												<tr>
+													<td>
+														<li><a href="#/administration/users"> {{localization.getMessage('administration.users')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/administration/usergroups"> {{localization.getMessage('administration.userGroups')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/administration/servicegroups"> {{localization.getMessage('administration.serviceGroups')}}</a></li>
+													</td>
+												</tr>
+											</tbody></table>
+										</div>
+									</ul>
+									
+								</div>
+								<!--div class="panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<li data-toggle="collapse" data-parent="#accordion" href="#collapseEight"><span class="glyphicon glyphicon-folder-close"></span> {{localization.getMessage('submenu.order')}}</a></li>
+										</h4>
+									</div>
+									<ul id="collapseEight" class="panel-collapse collapse nav">
+										<div class="panel-body">
+											<table class="table">
+												<tbody>
+												<tr>
+													<td>
+														<li><a href="#/order/order"> {{localization.getMessage('submenu.order')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/customer"> {{localization.getMessage('order.customers')}}</a></li>
+													</td>
+												</tr-->
+												<!--
+												<tr>
+													<td>
+														<li><a href="#/order/urgent_status"> {{localization.getMessage('order.urgentStatus')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/stockroom"> {{localization.getMessage('order.stockroom')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/shipping_document"> {{localization.getMessage('order.shippingDocument')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/selling_price"> {{localization.getMessage('order.sellingPrice')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/request_for_production"> {{localization.getMessage('order.requestForProduction')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/pro_forma_invoice"> {{localization.getMessage('order.proFormaInvoice')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/payment_method"> {{localization.getMessage('order.paymentMethod')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/payment_condition"> {{localization.getMessage('order.paymentCondition')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/packing_method"> {{localization.getMessage('order.packingMethod')}}</a></li>
+													</td>
+												</tr>
+												
+												<tr>
+													<td>
+														<li><a href="#/order/market"> {{localization.getMessage('order.market')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/invoice"> {{localization.getMessage('order.invoice')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/denotation_method"> {{localization.getMessage('order.denotationMethod')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/delivery_method"> {{localization.getMessage('order.deliveryMethod')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/declaration_basis"> {{localization.getMessage('order.declarationBasis')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/customer_request"> {{localization.getMessage('order.customerRequest')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/customer"> {{localization.getMessage('order.customer')}}</a></li>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<li><a href="#/order/commerciality_status"> {{localization.getMessage('order.commercialityStatus')}}</a></li>
+													</td>
+												</tr>
+											</tbody>
+											--><!--/table>
+										</div>
+									</ul>
+								</div-->
+								<div class="panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<li data-toggle="collapse" data-parent="#accordion" href="#collapseNine"><span class="glyphicon glyphicon-folder-close"></span> {{localization.getMessage('submenu.sales')}}</a></li>
+										</h4>
+									</div>
+									<ul id="collapseNine" class="panel-collapse collapse nav">
+										<div class="panel-body">
+											<table class="table">
+												<tbody>
+	                                                <tr>
+	                                                    <td>
+	                                                        <li><a href="#/procurement/invoice"> {{localization.getMessage('order.invoice')}}</a></li>
+	                                                    </td>
+	                                                </tr>
+	                                                <tr>
+	                                                    <td>
+	                                                        <li><a href="#/order/order"> {{localization.getMessage('submenu.order')}}</a></li>
+	                                                    </td>
+	                                                </tr>
+	                                                <tr>
+	                                                    <td>
+	                                                        <li><a href="#/order/customer"> {{localization.getMessage('order.customers')}}</a></li>
+	                                                    </td>
+	                                                </tr>
+	                                            </tbody>
+	                                        </table>
+										</div>
+									</ul>
+								</div>
+								<div class="panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<li data-toggle="collapse" data-parent="#accordion" href="#collapseTen"><span class="glyphicon glyphicon-folder-close"></span> {{localization.getMessage('submenu.initialization')}}</a></li>
+										</h4>
+									</div>
+									<ul id="collapseTen" class="panel-collapse collapse nav">
+										<div class="panel-body">
+											<table class="table">
+												<tbody>
+												<tr>
+													<td>
+														<li><a href="#/initialization/source_attention"> {{localization.getMessage('initialization.sourceAttention')}}</a></li>
+													</td>
+												</tr>
+	                                            <tr>
+													<td>
+														<li><a href="#/initialization/payment_condition"> {{localization.getMessage('order.paymentCondition')}}</a></li>
+													</td>
+												</tr>
+	                                            <tr>
+													<td>
+														<li><a href="#/initialization/payment_method"> {{localization.getMessage('order.paymentMethod')}}</a></li>
+													</td>
+												</tr>
+	                                            <tr>
+													<td>
+														<li><a href="#/initialization/denotation_method"> {{localization.getMessage('initialization.denotationMethod')}}</a></li>
+													</td>
+												</tr>
+	                                            <tr>
+													<td>
+														<li><a href="#/initialization/packing_method"> {{localization.getMessage('order.packingMethod')}}</a></li>
+													</td>
+												</tr>
+	                                            <tr>
+													<td>
+														<li><a href="#/sellingprice/selling_price"> {{localization.getMessage('order.sellingPrice')}}</a></li>
+													</td>
+												</tr>
+	                                            <tr>
+													<td>
+														<li><a href="#/initialization/tax_heading"> {{localization.getMessage('initialization.taxHeadings')}}</a></li>
+													</td>
+												</tr>
+	                                            <tr>
+													<td>
+														<li><a href="#/initialization/commerciality_status"> {{localization.getMessage('order.commercialityStatus')}}</a></li>
+													</td>
+												</tr>
+	                                            <tr>
+													<td>
+														<li><a href="#/initialization/declaration_basis"> {{localization.getMessage('order.declarationBasis')}}</a></li>
+													</td>
+												</tr>
+	                                            <tr>
+													<td>
+														<li><a href="#/initialization/tax"> {{localization.getMessage('initialization.taxes')}}</a></li>
+													</td>
+												</tr>
+	                                            <tr>
+													<td>
+														<li><a href="#/order/delivery_method"> {{localization.getMessage('order.deliveryMethod')}}</a></li>
+													</td>
+												</tr>
+											</tbody></table>
+										</div>
+									</ul>
+								</div>
+								
+								
+							</ul>
+						</ul>
+					</div>
+				</div>
+			</div>
+		<!--/div-->
+		<div id="push"></div>
+	</div>	

@@ -1,0 +1,76 @@
+package com.doobgroup.server.sessionbeans.{{entity.module.name|lower}};
+
+{% if not entity is has_items %}
+import javax.ejb.Local;
+import javax.ejb.Stateless;
+
+import com.doobgroup.server.entities.{{entity.module.name|lower}}.{{entity.name}}Bean;
+
+import com.doobgroup.server.sessionbeans.common.GenericDaoPagBean;
+
+@Stateless
+@Local({{entity.name}}BeanDaoLocal.class)
+public class {{entity.name}}BeanDao extends GenericDaoPagBean<{{entity.name}}Bean, Long>
+	implements {{entity.name}}BeanDaoLocal {
+
+}
+{% else %}
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.ejb.Local;
+import javax.ejb.Stateless;
+import javax.persistence.Query;
+
+import com.doobgroup.server.entities.{{entity.module.name|lower}}.{{entity.name}}Bean;
+{% set sub_entity = get_sub_entity(entity) %}
+import com.doobgroup.server.entities.{{sub_entity.module.name|lower}}.{{sub_entity.name}}Bean;
+import com.doobgroup.server.services.{{sub_entity.module.name|lower}}.{{sub_entity.name}}Service;
+import com.doobgroup.server.sessionbeans.common.GenericDaoBean;
+import com.doobgroup.server.util.RestrictSoftDeleteException;
+
+@Stateless
+@Local({{entity.name}}BeanDaoLocal.class)
+public class {{entity.name}}BeanDao extends GenericDaoBean<{{entity.name}}Bean, Long>
+	implements {{entity.name}}BeanDaoLocal {
+
+	@EJB
+	private {{sub_entity.name}}BeanDaoLocal {{sub_entity.name|lower}}Dao;
+
+	@Override
+	public {{entity.name}}Bean crudEager({{entity.name}}Bean entity, String dmlOperation) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException, RestrictSoftDeleteException {
+
+		if(dmlOperation.equals("I")) {
+			this.persist(entity);
+		}
+		else if(dmlOperation.equals("U")) {
+			this.merge(entity);
+		}
+		else if(dmlOperation.equals("D")) {
+			this.remove(entity);
+		}
+        {% set sub_entity_relationship = get_sub_entity_relationship(entity) %}
+		for({{sub_entity.name}}Bean {{sub_entity.name|lower}} : entity.get{{sub_entity_relationship.name|firstupper}}()) {
+
+			{{sub_entity.name|lower}}.set{{entity.name}}(entity);
+			if({{sub_entity.name|lower}}.getDeleted() == true) {
+				if({{sub_entity.name|lower}}.getId() != null) {
+					{{sub_entity.name|lower}}.setDeleted(false);
+					{{sub_entity.name|lower}}Dao.remove({{sub_entity.name|lower}});
+				}
+			}
+			else if({{sub_entity.name|lower}}.getId() != null) {
+				{{sub_entity.name|lower}}Dao.merge({{sub_entity.name|lower}});
+			}
+			else {
+				{{sub_entity.name|lower}}Dao.persist({{sub_entity.name|lower}});
+			}
+		}
+
+		return entity;
+	}
+
+}
+
+{% endif %}

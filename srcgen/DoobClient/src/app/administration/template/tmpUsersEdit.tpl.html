@@ -1,0 +1,98 @@
+<div class="inmodal hmodal-info">
+  <div class="color-line"></div>
+  <div class="modal-header">
+    <h4 class="modal-title">{{localization.getMessage('administration.users.edit')}}</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <form method="get" class="form-horizontal col-lg-6">
+        <div class="form-group">
+          <label class="col-sm-5 control-label">{{localization.getMessage('administration.users.identificationCode')}} <span class="required">*</span>
+          </label>
+          <div class="col-sm-7">
+            <input disabled type="text" class="form-control input-sm m-b-xs" ng-model="itemEdit.UIdentificationCode">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">{{localization.getMessage('administration.users.username')}} <span class="required">*</span>
+          </label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control input-sm m-b-xs" ng-model="itemEdit.UUsername">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">{{localization.getMessage('administration.users.password')}} <span class="required">*</span>
+          </label>
+          <div class="col-sm-7">
+            <input type="password" class="form-control input-sm m-b-xs" ng-model="itemEdit.UPassword">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">{{localization.getMessage('administration.users.language')}} <span class="required">*</span>
+          </label>
+          <div class="col-sm-7">
+            <ui-select class="m-b-xs" ng-model="itemEdit.language" >
+              <ui-select-match >
+                {{$select.selected.LName}}
+              </ui-select-match>
+              <ui-select-choices repeat="itemLang in itemLanguages | filter: $select.search">
+                <span ng-bind-html="itemLang.LName | highlight: $select.search"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <br/>
+    <label class=""><span class="required">*</span> {{localization.getMessage('common.requiredField')}}</label>
+    <div class="row">
+      <hr/>
+      <ng-include src ="'administration/template/tmpUsersDetail.tpl.html'">
+                </ng-include>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-doob" ng-click="save()" ng-disabled="!itemEdit.UIdentificationCode || !itemEdit.UUsername || !itemEdit.UPassword || !itemEdit.language">{{localization.getMessage('common.save')}}</button>
+    <button class="btn btn-doob" ng-click="undoChanges()">{{localization.getMessage('common.clear')}}</button>
+    <button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+  </div>
+</div>
+<!--div >
+    <form novalidate>
+        <div class="modal-header">
+            <h3 class="modal-title">{{localization.getMessage('administration.users.edit')}}</h3>
+        </div>
+        <div class="modal-body">
+            <!--div ng-repeat="fieldModel in model.fields">
+                <div ng-edit-field field-model="fieldModel" item="itemEdit" error="errors[fieldModel.name]" ></div>
+            </div-->
+            <!--table>                                                        
+                    <tr><td>{{localization.getMessage('administration.users.identificationCode')}}</td></tr>
+                    <tr ><td><input disabled type="text"  ng-model="itemEdit.UIdentificationCode" ></td><td ng-hide="itemEdit.UIdentificationCode">{{localization.getMessage('common.requiredField')}}</td></tr>
+                    <tr><td>{{localization.getMessage('administration.users.username')}}</td></tr>
+                    <tr ><td><input type="text" ng-model="itemEdit.UUsername"></td><td ng-hide="itemEdit.UUsername">{{localization.getMessage('common.requiredField')}}</td></tr>   
+                    <tr><td>{{localization.getMessage('administration.users.password')}}</td></tr>
+                    <tr ><td><input type="password" ng-model="itemEdit.UPassword"></td></tr> 
+                    <tr><td>{{localization.getMessage('administration.users.language')}}</td></tr>
+                    <tr ><td>
+                            <select ng-model="itemEdit.language"  
+                                ng-options="itemLang as itemLang.LName for itemLang in itemLanguages"
+                                >
+                            </select>
+                    </td><td ng-hide="itemEdit.language">{{localization.getMessage('common.requiredField')}}</td></tr>                                                        
+            </table>
+
+            <hr/>
+            <hr/>
+                <ng-include src ="'administration/template/tmpUsersDetail.tpl.html'">
+                </ng-include>
+                 
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-doob" ng-click="save()" ng-disabled="!itemEdit.UIdentificationCode || !itemEdit.UUsername || !itemEdit.UPassword || !itemEdit.language">{{localization.getMessage('common.save')}}</button>
+            <button class="btn btn-doob" ng-click="undoChanges()">{{localization.getMessage('common.clear')}}</button>
+            <button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+        </div>
+    </form>
+    
+</div-->

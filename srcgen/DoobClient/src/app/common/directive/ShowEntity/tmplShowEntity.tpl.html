@@ -1,0 +1,68 @@
+<div class="normalheader transition animated fadeIn small-header">
+  <div class="hpanel">
+    <div class="panel-body">
+      <a class="small-header-action" href="">
+      </a>
+      <h2 class="font-light m-b-xs">
+        {{localization.getMessage(model.label)}}
+      </h2>
+    </div>
+  </div>
+</div>
+<div class="content animate-panel">
+<div class="row">
+<div class="col-lg-12">
+<div class="hpanel">
+  <div class="panel-body">
+    <div class="row">
+      <!--div>
+        <h3 class="modal-title">{{localization.getMessage(model.label)}}</h3>
+        </div-->
+      <div class="modal-body">
+        <div class="btn-toolbar">
+          <div ng-edit-button all="items" model="model" class="btn-group" />
+            <div class="btn-group clearfix">
+              <button type="button" ng-disabled = "selectedItem==null" ng-click="remove(selectedItem)" class="btn btn-sm btn-doob btn-group">
+              <i class="glyphicon glyphicon-remove-circle"></i> {{localization.getMessage('button.remove')}}
+              </button>
+            </div>
+            <div ng-edit-button current="selectedItem" all="items" model="model" update="true" class="btn-group"/>
+            </div>
+            <br/>
+            <div class="table-container">
+              <table st-table="items"  st-safe-src="items" st-pagination-scroll  st-pipe="callServer" class="items fixed-header">
+                <thead>
+                  <tr>
+                    <th ng-repeat="field in model.fields" ng-if="field.important"
+                      lr-drag-src="headers"  lr-drop-target="headers" st-sort="{{field.name}}" st-skip-natural="true"
+                      class="table-column-header">
+                      {{localization.getMessage(field.label)}}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th ng-repeat="field in model.fields" ng-if="field.important">
+                      <input st-search="{{field.name}}" class="input-sm form-control" type="search"/>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="currentRow in items" st-select-row="currentRow" ng-click = "selection(currentRow)">
+                    <td ng-repeat="field in model.fields" ng-if="field.important">
+                      {{currentRow[field.name]}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--div ng-show="isLoading" class="loading-indicator"></div-->
+            </div>
+          </div>
+          <div>
+            <div ng-show-details item="selectedItem" model="model"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>

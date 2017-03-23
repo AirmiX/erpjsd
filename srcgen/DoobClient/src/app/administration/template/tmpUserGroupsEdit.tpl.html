@@ -1,0 +1,67 @@
+<div class="inmodal hmodal-info">
+  <div class="color-line"></div>
+  <div class="modal-header">
+    <h4 class="modal-title">{{localization.getMessage('administration.userGroups.edit')}}</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <form method="get" class="form-horizontal col-lg-6">
+        <div class="form-group">
+          <label class="col-sm-5 control-label">{{localization.getMessage('administration.userGroups.identificationCode')}} <span class="required">*</span>
+          </label>
+          <div class="col-sm-7">
+            <input type="text" disabled class="form-control input-sm m-b-xs" ng-model="itemEdit.UGIdentificationCode">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">{{localization.getMessage('administration.userGroups.name')}} <span class="required">*</span>
+          </label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control input-sm m-b-xs" ng-model="itemEdit.UGName">
+          </div>
+        </div>
+      </form>
+    </div>
+    <br/>
+    <label class=""><span class="required">*</span> {{localization.getMessage('common.requiredField')}}</label>
+    <div class="row">
+      <hr/>
+      <ng-include src ="'administration/template/tmpUserGroupsDetail.tpl.html'">
+      </ng-include>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-doob" ng-click="save()" ng-disabled="!itemEdit.UGIdentificationCode || !itemEdit.UGName">{{localization.getMessage('common.save')}}</button>
+    <button class="btn btn-doob" ng-click="undoChanges()">{{localization.getMessage('common.clear')}}</button>
+    <button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+  </div>
+</div>
+<!--div >
+    <form novalidate>
+        <div class="modal-header">
+            <h3 class="modal-title">{{localization.getMessage('administration.userGroups.edit')}}</h3>
+        </div>
+        <div class="modal-body">
+            <!--div ng-repeat="fieldModel in model.fields">
+                <div ng-edit-field field-model="fieldModel" item="itemEdit" error="errors[fieldModel.name]" ></div>
+            </div-->
+            <!--table>                                                        
+                    <tr><td>{{localization.getMessage('administration.userGroups.identificationCode')}}</td></tr>
+                    <tr ><td><input disabled type="text"  ng-model="itemEdit.UGIdentificationCode" ></td><td ng-hide="itemEdit.UGIdentificationCode">{{localization.getMessage('common.requiredField')}}</td></tr>
+                    <tr><td>{{localization.getMessage('administration.userGroups.name')}}</td></tr>
+                    <tr ><td><input type="text" ng-model="itemEdit.UGName"></td><td ng-hide="itemEdit.UGName">{{localization.getMessage('common.requiredField')}}</td></tr>                                                            
+            </table>
+
+            <hr/>
+            <ng-include src ="'administration/template/tmpUserGroupsDetail.tpl.html'">
+            </ng-include>
+                 
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-doob" ng-click="save()" ng-disabled="!itemEdit.UGIdentificationCode || !itemEdit.UGName">{{localization.getMessage('common.save')}}</button>
+            <button class="btn btn-doob" ng-click="undoChanges()">{{localization.getMessage('common.clear')}}</button>
+            <button class="btn btn-doob" ng-click="cancel()">{{localization.getMessage('common.cancel')}}</button>
+        </div>
+    </form>
+    
+</div-->

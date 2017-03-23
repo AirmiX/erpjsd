@@ -1,0 +1,12 @@
+'use strict';
+
+angular.module('Doob.{{module.name|lower}}').config(['$routeProvider', function ($routeProvider) {
+  $routeProvider
+    {% for entity in entities | selectattr("module", "equalto", module) %}
+    .when('/{{ module.name|lower}}/{{ entity.name|lower }}s', {
+	    templateUrl:'{{ module.name|lower}}/{{ entity.name|lower }}/tmpl{{ entity.name }}View.tpl.html',
+	    controller:'ctrl{{ entity.name }}'
+    })
+    {% endfor %}
+    ;
+}]);

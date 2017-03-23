@@ -1,0 +1,40 @@
+<!-- Navigation -->
+<aside id="menu">
+    <div id="navigation">
+        <div class="profile-picture">
+            <div class="stats-label text-color">
+                <span class="font-extra-bold font-uppercase">{{ '{{' }}currentUser.UUsername{{ '}}' }}</span>
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <small class="text-muted">Profile <b class="caret"></b></small>
+                    </a>
+                    <ul class="dropdown-menu animated flipInX m-t-xs">
+                        <li><a href="#/changepassword">{{ '{{' }}localization.getMessage('administration.users.changePassword'){{ '}}' }}</a></li>
+                        <li><a ng-click="logout()">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="#"><span class="nav-label">Administration</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li ng-class="{active: isActive('/administration/users')}"><a href="#/administration/users"> {{ '{{' }}localization.getMessage('administration.users'){{ '}}' }}</a></li>
+                    <li ng-class="{active: isActive('/administration/usergroups')}"><a href="#/administration/usergroups"> {{ '{{' }}localization.getMessage('administration.userGroups'){{ '}}' }}</a></li>
+                    <li ng-class="{active: isActive('/administration/servicegroups')}"><a href="#/administration/servicegroups"> {{ '{{' }}localization.getMessage('administration.serviceGroups'){{ '}}' }}</a></li>
+                    <li ng-class="{active: isActive('/administration/language')}"><a href="#/administration/language"> {{ '{{' }}localization.getMessage('menu.language'){{ '}}' }}</a></li>
+                </ul>
+            </li>
+            {% for module in modules %}
+            <li>
+                <a href="#"><span class="nav-label">{{ '{{' }}localization.getMessage('menu.{{ module.label }}'){{ '}}' }}</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    {% for entity in entities | selectattr("module", "equalto", module) %}
+                    <li ng-class="{active: isActive('/{{ module.name|lower }}/{{ entity.name|lower }}s')}" ng-if="hasServiceGroup('/{{ module.name|lower }}/{{ entity.name|lower }}s', 'GET')"> <a href="#/{{ module.name|lower }}/{{ entity.name|firstlower }}"> {{ '{{' }}localization.getMessage('submenu.{{ module.label }}.{{ entity.label }}'){{ '}}' }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</aside>
