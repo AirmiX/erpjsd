@@ -1,0 +1,80 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+140282403473024[ label="{kvd|:}"]
+
+140282403234208 -> 140282402360304[arrowtail=diamond, dir=both, headlabel="simple_types 0..*"]
+140282403234208 -> 140282403278112[arrowtail=diamond, dir=both, headlabel="enums 0..*"]
+140282403234208 -> 140282403289792[arrowtail=diamond, dir=both, headlabel="modules 1..*"]
+140282403234208 -> 140282403299344[arrowtail=diamond, dir=both, headlabel="entities 1..*"]
+140282403234208 -> 140282403374672[arrowtail=diamond, dir=both, headlabel="views 1..*"]
+140282403234208[ label="{ViewModel|}"]
+
+140282402360304[ label="{SimpleType|+name:ID\l}"]
+
+140282403425264 -> 140282403374672[headlabel="view "]
+140282403425264[ label="{ViewRelationship|+name:ID\l+label:STRING\l+type:RelationshipType\l+editable:BOOL\l+required:BOOL\l}"]
+
+140282403358976 -> 140282403299344[headlabel="entity "]
+140282403358976[ label="{Relationship|+name:ID\l+list:STRING\l+identifiedBy:STRING\l+subEntity:STRING\l}"]
+
+140282403347120[ label="{Constraint|+min:INT\l+max:INT\l}"]
+
+140282403278112[ label="{Enum|+name:ID\l+values:list[ID]\l}"]
+
+140282403445344[ label="{ViewPropertyType|text\|number\|datetime\|date\|select\|image\|checkbox}"]
+
+140282403289792[ label="{Module|+name:ID\l+label:STRING\l}"]
+
+140282403299344 -> 140282403289792[headlabel="module "]
+140282403299344 -> 140282403330240[arrowtail=diamond, dir=both, headlabel="properties 0..*"]
+140282403299344 -> 140282403358976[arrowtail=diamond, dir=both, headlabel="relationships 0..*"]
+140282403299344[ label="{Entity|+name:ID\l+label:STRING\l}"]
+
+140282403405728 -> 140282403330240[headlabel="property "]
+140282403405728[ label="{ViewProperty|+label:STRING\l+type:ViewPropertyType\l+important:BOOL\l+editable:BOOL\l+required:BOOL\l}"]
+
+140282403454128[ label="{RelationshipType|one ( choose\|select )\|many ( crud )\?}"]
+
+140282403330240 -> 140282402360304[headlabel="type "]
+140282403330240 -> 140282403347120[arrowtail=diamond, dir=both, headlabel="constraint "]
+140282403330240[ label="{Property|+name:ID\l+unique:STRING\l+mandatory:STRING\l}"]
+
+140282403374672 -> 140282403299344[headlabel="entity "]
+140282403374672 -> 140282403405728[arrowtail=diamond, dir=both, headlabel="properties 0..*"]
+140282403374672 -> 140282403330240[headlabel="reprProperty "]
+140282403374672 -> 140282403425264[arrowtail=diamond, dir=both, headlabel="relationships 0..*"]
+140282403374672[ label="{View|+name:ID\l+label:STRING\l}"]
+
+140282402420272[ label="{STRING|}"]
+
+140282402434240[ label="{BASETYPE|}"]
+140282402434240 -> 140282402430832 [dir=back]
+140282402434240 -> 140282402422912 [dir=back]
+140282402434240 -> 140282402417632 [dir=back]
+140282402434240 -> 140282402420272 [dir=back]
+
+140282402425552[ label="{INT|}"]
+
+140282402428192[ label="{FLOAT|}"]
+
+140282402430832[ label="{NUMBER|}"]
+140282402430832 -> 140282402428192 [dir=back]
+140282402430832 -> 140282402425552 [dir=back]
+
+140282402422912[ label="{BOOL|}"]
+
+140282402417632[ label="{ID|}"]
+
+
+}
